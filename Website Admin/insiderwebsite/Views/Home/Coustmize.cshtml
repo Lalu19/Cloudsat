@@ -1,0 +1,639 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "Coustmize";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+    string ImageUrl = Configuration.GetValue<string>("WebImage");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .spdt {
+        padding-top: 130px;
+    }
+    .block-infinite.layout-02 .item {
+        border-color: #d1cdcd;
+        border-radius: 0px;
+        padding: 0px 0px;
+        min-width: 200px;
+        margin-right: 0px;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.17);
+    }
+
+    svg {
+        vertical-align: middle;
+        margin-left: -140px;
+        margin-top: -12px;
+    }
+    img.applogo {
+        width: 115% !important;
+        max-width: 90%;
+        margin: 0px 0px 0px 0px;
+        height: 66px;
+    }
+
+    .col-md-5.Appname {
+        padding: 22px 0px 16px 0px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .col-md-3.Appcheck {
+        text-align: center;
+        margin: 10px 0px 0px 0px;
+    }
+
+    input.radio {
+        width: 40%;
+        cursor: pointer;
+    }
+
+    span.Appnamess {
+        font-size: 15px !important;
+        color: var(--sala-neutral-dark, #111111) !important;
+        font-weight: 600 !important;
+    }
+
+    .cart-totals {
+        justify-content: normal;
+        margin-top: 0px;
+    }
+
+        .cart-totals .cart-total {
+            padding: 13px;
+            background-color: #95afff;
+            flex: 0 0 290px;
+            word-wrap: break-word;
+            background-color: #FFF;
+            background-clip: border-box;
+            border-radius: 0.1875rem;
+            box-shadow: -40px 40px 160px 0 rgba(0, 0, 0, 0.08), -8px 8px 15px 0 rgba(120, 120, 120, 0.04), 3px 3px 30px 0 rgba(0, 0, 0, 0.04) !important;
+        }
+
+    img.selecteditemimage {
+        width: 20%;
+        height: 43px;
+    }
+
+    h3.title {
+        padding-bottom: 15px;
+        font-size: 20px;
+    }
+
+    input[type="checkbox"] {
+        width: 40%;
+        cursor: pointer;
+    }
+
+    span.namethis {
+        font-size: 11px !important;
+    }
+
+    input.monthwiseradio {
+        width: 20%;
+        float: right;
+    }
+
+    .col-md-6.moth {
+        margin: 9px -1px 4px -15px;
+    }
+
+    input.radiobutton {
+        height: 23px;
+        line-height: 16px;
+        padding: 0px 0px;
+        background-color: var(--sala-shade-background, #F8F9FC);
+        color: var(--sala-neutral-dark, #111111);
+        border: 0;
+        cursor: pointer;
+        border-radius: 3px;
+        width: 4%;
+    }
+
+    span.pricethis {
+        font-size: 16px !important;
+        float: right;
+        padding: 13px 0 0 0;
+    }
+
+    .cart-totals .cart-total a.button {
+        padding: 0px 100px;
+        height: 40px;
+    }
+
+    .cart-totals .cart-total table td {
+        padding: 2px 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .openerp_enterprise_pricing_app .openerp_enterprise_pricing_app_container {
+        border-top: 1px solid #E9ECEF;
+        user-select: none;
+    }
+
+    .card, .panel, .well {
+        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.17);
+    }
+
+    .card, .well, .panel {
+        overflow: hidden;
+    }
+
+    .pe-2 {
+        padding-right: 0.5rem !important;
+    }
+
+    .align-items-center {
+        align-items: center !important;
+    }
+
+    .flex-row {
+        flex-direction: row !important;
+    }
+
+    .w-100 {
+        width: 100% !important;
+    }
+</style>
+
+<style>
+    @@media(min-width: 168px) and (max-width: 1199px) {
+        h3.title {
+            padding-bottom: 15px;
+            font-size: 20px;
+            margin-left: 82px;
+        }
+    }
+
+
+    @@media(min-width: 992px) and (max-width: 1199px) {
+        .col-md-3 {
+            flex: 0 0 auto;
+            width: 25%;
+            margin-left: 40px;
+        }
+
+        h3.title {
+            padding-bottom: 15px;
+            font-size: 20px;
+            margin-left: 82px;
+        }
+    }
+
+    @@media(min-width: 768px) and (max-width: 991px) {
+        .col-md-3 {
+            flex: 0 0 auto;
+            width: 25%;
+            margin-left: 80px;
+        }
+    }
+
+    @@media (max-width: 1000px) {
+        img.weblogo {
+            margin: 0px 0px -15px 0px !important;
+            width: 89px;
+        }
+    }
+
+    @@media(min-width: 100px) and (max-width: 767px) {
+        .col-md-5.Appname {
+            padding: 0px 0px 10px 0px;
+            margin-top: -47px;
+            margin-left: 77px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .col-md-3.Appcheck {
+            text-align: center;
+            margin: -61px 0 -8px -38px;
+        }
+
+        input[type="checkbox"] {
+            width: 4%;
+            margin-left: 280px
+        }
+
+        h3.title {
+            padding-bottom: 15px;
+            font-size: 20px;
+            margin-left: 4px;
+        }
+
+        .toggle {
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 64px;
+            display: grid;
+        }
+
+        input.radiobutton {
+            height: 23px;
+            line-height: 16px;
+            padding: 0px 0px;
+            background-color: var(--sala-shade-background, #F8F9FC);
+            color: var(--sala-neutral-dark, #111111);
+            border: 0;
+            cursor: pointer;
+            border-radius: 3px;
+            width: 16%;
+            margin-top: -23px;
+            margin-left: 150px;
+        }
+    }
+
+    @@media (min-width: 498px) and (max-width: 850px) {
+        svg {
+            vertical-align: middle;
+            margin-left: 136px !important;
+            margin-top: -62px;
+        }
+    }
+
+    @@media (min-width: 200px) and (max-width: 497px) {
+        svg {
+            vertical-align: middle;
+            margin-left: 171px;
+            margin-top: -67px;
+            margin-right: 113px;
+        }
+    }
+</style>
+
+
+
+<main id="main" class="site-main">
+    <section class="section spdt">
+        <div class="heading align-center">
+            <h2 class="heading-title w500 size-l">Choose your Apps</h2>
+            <div class="heading-desc"><b>Free</b> instant access, <b>no credit card</b> required.</div>
+        </div>
+        <div class="block-infinite layout-02">
+            <div class="container">
+                <div class="row">
+                    <div class="toggle">
+                        <span class="text">Monthly</span>
+                        <input type="radio" class="radiobutton" name="duration" data-amount="monthly" checked />
+                        <span class="text">Quarterly</span>
+                        <input type="radio" class="radiobutton" name="duration" data-amount="quarterly" />
+                        <span class="text">Halfyearly</span>
+                        <input type="radio" class="radiobutton" name="duration" data-amount="halfyearly" />
+                        <span class="text">Yearly</span>
+                        <input type="radio" class="radiobutton" name="duration" data-amount="yearly" />
+
+                    </div>
+                    <div id="itemBuind">
+                      <div class="col-md-12" >
+                        @* <div class="row">
+                                <h3 class="title">WEBSITE</h3>
+                                <div class="col-md-3 ">
+                                    <div class="item appitems">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="thumb">
+                                                    <img class="applogo" src="~/assets/images/binance.png" alt="Binance">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 Appname">
+                                                <span class="Appnamess">Website</span>
+                                                <span class="priceamount" hidden></span>
+                                            </div>
+                                            <div class="col-md-3 Appcheck">
+                                                <span><input type="radio" class="radio" /></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="item">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="thumb">
+                                                    <img class="applogo" src="~/assets/images/binance.png" alt="Binance">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 Appname">
+                                                <span class="Appnamess">eCommerce</span>
+                                            </div>
+                                            <div class="col-md-3 Appcheck">
+                                                <span><input type="radio" class="radio" /></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="item">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="thumb">
+                                                    <img class="applogo" src="~/assets/images/binance.png" alt="Binance">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 Appname">
+                                                <span class="Appnamess">eLearning</span>
+                                            </div>
+                                            <div class="col-md-3 Appcheck">
+                                                <span><input type="radio" class="radio" /></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="item">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="thumb">
+                                                    <img class="applogo" src="~/assets/images/binance.png" alt="Binance">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 Appname">
+                                                <span class="Appnamess">Live Chat</span>
+                                            </div>
+                                            <div class="col-md-3 Appcheck">
+                                                <span><input type="radio" class="radio" /></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="item">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="thumb">
+                                                    <img class="applogo" src="~/assets/images/binance.png" alt="Binance">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 Appname">
+                                                <span class="Appnamess">Subscriptions</span>
+                                            </div>
+                                            <div class="col-md-3 Appcheck">
+                                                <span><input type="radio" class="radio" /></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="item">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="thumb">
+                                                    <img class="applogo" src="~/assets/images/binance.png" alt="Binance">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 Appname">
+                                                <span class="Appnamess">Manufacturing</span>
+                                            </div>
+                                            <div class="col-md-3 Appcheck">
+                                                <span><input type="radio" class="radio" /></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <h3 class="title">SALES</h3>
+                                <div class="col-md-3 ">
+                                    <div class="item appitems">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="thumb">
+                                                    <img class="applogo" src="~/assets/images/binance.png" alt="Binance">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 Appname">
+                                                <span class="Appnamess">Website</span>
+                                            </div>
+                                            <div class="col-md-3 Appcheck">
+                                                <span><input type="radio" class="radio" /></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="item">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="thumb">
+                                                    <img class="applogo" src="~/assets/images/binance.png" alt="Binance">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 Appname">
+                                                <span class="Appnamess">eCommerce</span>
+                                            </div>
+                                            <div class="col-md-3 Appcheck">
+                                                <span><input type="radio" class="radio" /></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="item">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="thumb">
+                                                    <img class="applogo" src="~/assets/images/binance.png" alt="Binance">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 Appname">
+                                                <span class="Appnamess">eLearning</span>
+                                            </div>
+                                            <div class="col-md-3 Appcheck">
+                                                <span><input type="radio" class="radio" /></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="item">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="thumb">
+                                                    <img class="applogo" src="~/assets/images/binance.png" alt="Binance">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 Appname">
+                                                <span class="Appnamess">Live Chat</span>
+                                            </div>
+                                            <div class="col-md-3 Appcheck">
+                                                <span><input type="radio" class="radio" /></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="item">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="thumb">
+                                                    <img class="applogo" src="~/assets/images/binance.png" alt="Binance">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 Appname">
+                                                <span class="Appnamess">Subscriptions</span>
+                                            </div>
+                                            <div class="col-md-3 Appcheck">
+                                                <span><input type="radio" class="radio" /></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="item">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="thumb">
+                                                    <img class="applogo" src="~/assets/images/binance.png" alt="Binance">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 Appname">
+                                                <span class="Appnamess">Manufacturing</span>
+                                            </div>
+                                            <div class="col-md-3 Appcheck">
+                                                <span><input type="radio" class="radio" /></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                    </div>
+                    </div>
+                    <div class="col-md-3" id="appselectorscard">
+                        <div class="cart-totals">
+                            <div class="cart-total">
+                                <h2 class="title"><span id="totalchecked"></span> App Selected</h2>
+                                <table id="selectedItems">
+                                    <tbody>
+                                    </tbody>
+
+                                </table>
+                                <div class="">
+                                    <a href="#" id="bt_procced" class="button fullfield">Continue</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+</main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+@section Scripts{
+
+
+    <script>
+        $(document).ready(function () {
+            $('.radiobutton').click(function () {
+                // Uncheck all radio buttons
+                $('.radiobutton').prop('checked', false);
+
+                // Check the clicked radio button
+                $(this).prop('checked', true);
+                countCheckedRadio();
+            });
+        });
+
+        getApplicationList();
+        function getApplicationList() {
+            $.ajax({
+                url: "@apiUrl/api/ApplicationMaster/GetAllApplicationMasterList",
+                type: "GET",
+                success: function (data) {
+                    var x = '';
+                    var parentName = '';
+                    var checkedCount = 0;
+                    for (var i = 0; i < data.data.length; i++) {
+                        parentName = data.data[i].parentName;
+
+                        if (parentName === "Primary") {
+                            x += '<div class="row"> <h3 class="title">' + data.data[i].applicationMasterName + '</h3 > ';
+
+                            for (var j = 0; j < data.data.length; j++) {
+                                if (data.data[j].parentName == data.data[i].applicationMasterName) {
+                                    x += '<div class="col-md-3"><div class="item appitems"><div class="row"><div class="col-md-4"><div class="thumb"><img class="applogo" src="@ImageUrl' + data.data[j].applicationMasterLogo + '" alt="Image"></div></div>';
+                                    x += '<div class="col-md-5 Appname"><span class="Appnamess">' + data.data[j].applicationMasterName + '</span> <span class="priceamountMonthly" hidden>' + data.data[j].applicationMasterMonthlyPrice + '</span> <span class="priceamountQuarterly" hidden>' + data.data[j].applicationMasterQuarterlyPrice + '</span> <span class="priceamountHalfyearly" hidden>' + data.data[j].applicationMasterHalfyearlyPrice + '</span><span class="priceamountYearly" hidden>' + data.data[j].applicationMasterYearlyPrice + '</span></div>';
+                                    x += '<div class="col-md-3 Appcheck"><span><input type="checkbox"  onchange="countCheckedRadio()"/></span></div></div></div></div>';
+                                }
+                            }
+                        }
+                        x += '</div>';
+                    }
+                    $('#itemBuind').html(x);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+
+        $('#appselectorscard').hide();
+        var itemNamessss = '';
+
+        function countCheckedRadio() {
+            var checkedCount = $('input[type="checkbox"]:checked').length;
+
+            if (checkedCount > 0) {
+                var selectedItems = '';
+                $('#appselectorscard').show();
+                $('input[type="checkbox"]:checked').each(function () {
+                    var selectedPrice = '';
+                    var selectedDuration = '';
+
+                    var appLogo = $(this).closest('.appitems').find('.applogo').attr('src');
+                    var appName = $(this).closest('.appitems').find('.Appnamess').text();
+                    var appmonth = $(this).closest('.appitems').find('.priceamountMonthly').text();
+                    var appquarterly = $(this).closest('.appitems').find('.priceamountQuarterly').text();
+                    var apphalf = $(this).closest('.appitems').find('.priceamountHalfyearly').text();
+                    var appyearly = $(this).closest('.appitems').find('.priceamountYearly').text();
+
+                    var selectedOption = $('input[name="duration"]:checked').data('amount');
+
+                    if (selectedOption === 'monthly') {
+                        selectedPrice = appmonth;
+                        // selectedDuration = 'Monthly';
+                    } else if (selectedOption === 'quarterly') {
+                        selectedPrice = appquarterly;
+                        //  selectedDuration = 'Quarterly';
+                    } else if (selectedOption === 'halfyearly') {
+                        selectedPrice = apphalf;
+                        //selectedDuration = 'Half Yearly';
+                    } else if (selectedOption === 'yearly') {
+                        selectedPrice = appyearly;
+                        //  selectedDuration = 'Yearly';
+                    }
+
+                    selectedItems += '<tr><td class="table-title"><img class="selecteditemimage" src="' + appLogo + '"/> <span class="namethis">' + appName + '</span><span class="pricethis">₹' + selectedPrice + '</span></td></tr>';
+                });
+
+                $('#selectedItems tbody').html(selectedItems);
+                $('#itemBuind').removeClass('col-md-12').addClass('col-md-9'); // Show the selected items in col-md-9
+                $('#totalchecked').html(checkedCount);
+            } else {
+                $('#selectedItems tbody').html('');
+                $('#totalchecked').html('');
+                $('#appselectorscard').hide();
+                $('#itemBuind').removeClass('col-md-9').addClass('col-md-12'); // Show the selected items in col-md-12
+            }
+        }
+
+
+        $(function () {
+            $("#bt_procced").click(function (e) {
+                window.location.href = "/Home/Registration?apps=" + itemNamessss + "&terms=m";
+            });
+        });
+    </script>
+    
+
+}

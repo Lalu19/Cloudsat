@@ -1,0 +1,154 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "Download";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .notices {
+        margin-bottom: 20px;
+        padding: 10px 10px 10px 10px;
+        background-color: #f2f5fd;
+        border: solid #dadef0 1px;
+    }
+
+    .col-md-6.productName {
+        padding: 10px 0px 0px 30px;
+        border-right: solid black 3px;
+    }
+
+    @@media (min-width: 498px) and (max-width: 850px) {
+        svg {
+            vertical-align: middle;
+            margin-left: 136px !important;
+            margin-top: -62px;
+        }
+    }
+
+    @@media (min-width: 200px) and (max-width: 497px) {
+        svg {
+            vertical-align: middle;
+            margin-left: 171px;
+            margin-top: -67px;
+            margin-right: 113px;
+        }
+    }
+
+
+    a.button.fullfield.downloadss {
+        height: 39px;
+        border: 1px solid #bfebff;
+        padding: 0px 10px;
+        font-size: 13px;
+        line-height: 1.5;
+        border-radius: 1px;
+        transition: all 0.3s;
+        font-weight: 700;
+    }
+
+    .col-md-6.downloadproduct {
+        text-align: center;
+    }
+
+    .page-title .title {
+        font-size: 56px;
+        font-weight: 600;
+        line-height: 1.11;
+        margin-top: 77px;
+    }
+
+   @@media (min-width: 200px) {
+    .notices {
+        margin-bottom: 20px;
+        padding: 10px 10px 10px 10px;
+        background-color: #f2f5fd;
+        border: solid #dadef0 1px;
+    }
+
+    .col-md-6.productName {
+        padding: 10px 0px 0px 30px;
+        border-right: solid black 3px;
+    }
+
+    a.button.fullfield.downloadss {
+        height: 39px;
+        border: 1px solid #bfebff;
+        padding: 0px 10px;
+        font-size: 13px;
+        line-height: 1.5;
+        border-radius: 1px;
+        transition: all 0.3s;
+        font-weight: 700;
+    }
+
+    .col-md-6.downloadproduct {
+        text-align: center;
+    }
+
+    .page-title .title {
+        font-size: 56px;
+        font-weight: 600;
+        line-height: 1.11;
+        margin-top: 77px;
+    }
+    }
+     @@media (max-width: 1000px) {
+        img.weblogo {
+            margin: 0px 0px -15px 0px !important;
+            width: 89px;
+        }
+    }
+   
+</style>
+<section class="page-title">
+    <div class="container">
+        <div class="inner align-center">
+            <h1 class="title">Application Download</h1>
+            <p class="desc">We have <span id="totalrecords"></span> products</p>
+        </div>
+    </div>
+</section><!-- PAGE TITLE -->
+<div class="container" id="downloadproducts">
+
+</div>
+
+@section scripts{
+    <script>
+        getdownloadSectionlist()
+        function getdownloadSectionlist() {
+            $.ajax(
+                {
+                    url: "@apiUrl/api/DownloadApp/GetDownloadApplicationList",
+                    type: "GET",
+                    success: function (data) {
+                      //  console.log(data);
+
+                        var x = '';
+                        for (var i = 0; i < data.data.length; i++) {
+
+                            x = x + '<div class="notices"><div class="row"><div class="col-md-6 productName"> <span>' + data.data[i]["applicationName"] + '</span></div><div class="col-md-6 downloadproduct"> <div class="buttons"><a href="#" class="button fullfield downloadss" > <span>Download </span></a></div></div></div></div> '
+
+                        }
+                        if(data.data){
+                            $('#totalrecords').text(data.data.recordsTotal);
+                        }
+
+                        $('#downloadproducts').html(x);
+
+
+                    },
+                    error: function (err) {
+                        console.log(err);
+
+                    }
+                }
+            );
+
+        }
+    </script>
+}

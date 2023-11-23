@@ -1,0 +1,12 @@
+1.	Multiple Companies In Single ERP
+2.	Unlimited Users
+3.	All Departments in Single ERP
+4.	Mobile Base ERP
+5.	Category wise Business Management
+6.	Feature base Selection
+7.	Customize ERP Modules
+8.	Multiple Store Management
+9.	Employee Monitor Recording
+10.	Real time Location Tracking
+11.	Geo Location Attendance System
+12.	Face Recognition Attendance System

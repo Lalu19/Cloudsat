@@ -1,0 +1,347 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "Category Create";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+}
+
+<style>
+    .btn-primary {
+        color: #fff;
+        background: #3b16cc !important;
+        border-color: #3b16cc !important;
+    }
+
+    a {
+        color: #3b16cc;
+    }
+
+    a {
+        color: #3b16cc;
+    }
+
+    .sweet-alert button {
+        background-color: #0052cc !important;
+    }
+
+    .btn-secondary {
+        color: #fff;
+        background: #0052cc !important;
+        border-color: #0052cc;
+    }
+    </style>
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="fe fe-pie-chart mr-1"></i> Admin Console</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Category</li>
+    </ol>
+    <div class="ml-auto">
+        <a href="~/Category/CategoryList" class="btn btn-primary btn-icon btn-sm text-white mr-2">
+            <span>
+                <i class="fe fe-plus"></i>
+            </span> View
+        </a>
+
+    </div>
+</div>
+
+<div class="col-md-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="col-md-11">
+                <div class="card-title">Catgory Create</div>
+            </div>
+
+        </div>
+        <div class="card-body">
+            <div>
+                <form action="#" role="form" class="validate" id="formPost">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div id="treeview">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Category Name</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="name" name="name" placeholder="Category Name" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Icon</label>
+                                        <input type="file" class="form-control" autocomplete="off" id="icon" name="icon" placeholder="Icon" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Order</label>
+                                        <input type="number" class="form-control" autocomplete="off" id="Order" name="Order" placeholder="Order" required />
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <button type="button" id="btnSave" class="btn btn-primary">Save</button>
+
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
+
+
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <script>
+        var categoryId;
+
+
+        function showTable() {
+            $('#tableView').show();
+            $('#treeview').hide();
+        }
+        function showTree() {
+            $('#tableView').hide();
+            $('#treeview').show();
+        }
+
+
+        $(function () {
+            $('#treeview').jstree({
+                'core': {
+                    'data': {
+                        'url': '/Category/WithPrimaryNodes',
+                        'data': function (node) {
+                            return { 'id': node.id };
+                        }
+                    }
+                }
+            });
+
+
+            $('#treeview').on('changed.jstree', function (e, data) {
+                var i, j, r = [];
+                for (i = 0, j = data.selected.length; i < j; i++) {
+                    r.push(data.instance.get_node(data.selected[i]));
+
+                }
+                categoryId = r[0].id;
+
+
+                // $('#event_result').html('Selected: ' + r.join(', '));
+            }).jstree();
+
+
+
+            $("#btnSave").click(function (e) {
+                if (!document.getElementById("formPost").checkValidity()) {
+                    e.preventDefault();
+                } else {
+
+                    if (categoryId != null) {
+                        imgPath = '';
+                        var totalFiles = document.getElementById('icon').files.length;
+                        if (totalFiles > 0) {
+                            uploadFile();
+                        }
+
+                        if (categoryId == 0) {
+                            categoryId = null;
+                        }
+
+                        var model = {
+                            name: $.trim($("#name").val()),
+                            Parent: parseInt(categoryId),
+                          
+                            icon: imgPath,
+                            Order: parseInt($("#Order").val()),
+                          
+                            createdBy:@Context.Session.GetInt32("UserId"),
+                           
+                        }
+
+                        $.ajax({
+                            type: "POST",
+                            url: "@apiUrl/api/Category/CreateCategory",
+                            data: JSON.stringify(model),
+                            contentType: "application/json; charset=utf-8",
+                            headers: {
+                                "authorization": "Bearer @Context.Session.GetString("TokenTxt")"
+                            },
+
+                            success: function (data, statusText, xhr) {
+                                
+                                if (xhr.status === 200) {
+
+                                    sweetAlert({
+                                        html: true,
+                                        title: "Category",
+                                        text: "Successfully created!",
+                                        type: "success"
+                                    }, function () {
+                                        location.reload();
+                                    });
+                                } else if (data.status === "duplicate") {
+                                    sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                                } else if (data.status === "error") {
+                                    sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                                } else {
+                                    sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                                }
+                            },
+                            error: function (data) {
+                               
+                                if (data.status == 401) {
+                                    window.location.replace('/Message/TokenExpire');
+                                } else if (data.status == 403) {
+                                    window.location.replace('/Message/Unauthorize');
+                                } else if (data.status == 400) {
+                                    sweetAlert("Validation Alert!", "Please check input data!", "warning");
+                                }
+                            }
+                        });
+                    }
+                    else {
+                        sweetAlert("Validation Alert!", "Please Select Parrent Category", "warning");
+                    }
+                }
+                });
+         });
+
+
+
+
+        function uploadFile() {
+            var totalFiles = document.getElementById('icon').files.length;
+            if (totalFiles > 0) {
+                var formData = new FormData();
+                var files = document.getElementById('icon').files;
+                formData.append("file", files[0]);
+                $.ajax(
+                    {
+                        url: "/Upload/ImgUpload",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        async: false,
+                        type: "POST",
+                        success: function (data) {
+                            imgPath = data;
+
+                        },
+                        error: function (data) {
+                            window.location.replace('/Message/SessionExpire');
+                        }
+                    }
+                );
+            }
+
+        }
+
+
+        function parentCategoryList(id) {
+            var opt = '';
+            $.ajax({
+                type: "GET",
+                url: '@apiUrl/api/Category/GetCategoryList',
+
+                headers: {
+                    "authorization": "Bearer @Context.Session.GetString("TokenTxt")"
+
+                },
+                dataType: "json",
+                success: function (data) {
+                    var options = [];
+                    
+                    options.push('<option>Primary</option>');
+                    for (var i = 0; i < data.length; i++) {
+                        if (categoryId != data[i].categoryId) {
+                            if (id == data[i].categoryId) {
+                                opt = 'selected'
+                            } else {
+                                opt = '';
+                            }
+                            options.push('<option value="' + data[i].categoryId + '" ' + opt + '>' + data[i].alias + '</option>');
+                        }
+                    }
+                    $("#Parent").html(options.join(''));
+                },
+                error: function (data) {
+                    if (data.status == 401) {
+                        window.location.replace('/Message/TokenExpire');
+                    } else if (data.status == 403) {
+                        window.location.replace('/Message/Unauthorize');
+                    }
+                }
+            });
+        }
+
+
+
+        function activate_and_deactivate(el) {
+
+
+            var id = el.value;
+            var status = el.checked;
+
+                  $.ajax({
+                type: "GET",
+                      url: "@apiUrl/api/Category/GetActivateDeactivateCategory/" + id+"/" + @Context.Session.GetInt32("UserId") +"/"+status,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers: {
+                    "authorization": "Bearer @Context.Session.GetString("TokenTxt")"
+                },
+                success: function (data, statusText, xhr) {
+                  
+                    if (xhr.status == 200) {
+                        $('#categoryTable').DataTable().ajax.reload(null, false);
+
+                    }
+                    else {
+                        sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                    }
+                },
+                error: function (data) {
+                   
+                    if (data.status == 401) {
+                        console.log('un-authorized/token expired');
+                        window.location.replace('/Message/TokenExpire');
+                    } else if (data.status == 403) {
+                        console.log('forbidden/no permission');
+                        window.location.replace('/Message/Unauthorize');
+                    }
+
+                }
+            });
+
+        }
+
+    </script>
+}

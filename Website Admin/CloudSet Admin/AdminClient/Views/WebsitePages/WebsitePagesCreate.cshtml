@@ -1,0 +1,279 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "WebsitePage Create";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+}
+
+<style>
+    .btn-primary {
+        color: #fff;
+        background: #3b16cc !important;
+        border-color: #3b16cc 74 !important;
+    }
+
+    #back-to-top {
+        background: #2d25c5;
+    }
+
+        #back-to-top:hover {
+            color: #3b16cc !important;
+            border: 2px solid #3b16cc;
+        }
+
+    .slide-menu a.active {
+        color: #3b16cc !important;
+    }
+
+    .sweet-alert button {
+        background-color: #0052cc !important;
+    }
+
+    a {
+        color: #3b16cc;
+    }
+</style>
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="fe fe-pie-chart mr-1"></i> Admin Console</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Category</li>
+    </ol>
+    <div class="ml-auto">
+        <a href="~/WebsitePages/WebsitePagesList" class="btn btn-primary btn-icon btn-sm text-white mr-2">
+            <span>
+                <i class="fe fe-plus"></i>
+            </span> View
+        </a>
+
+    </div>
+</div>
+
+<div class="col-md-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="col-md-11">
+                <div class="card-title">WebsitePage Create</div>
+            </div>
+        </div>
+        <div class="card-body" id="section">
+            <div>
+                <form action="#" role="form" class="validate" id="formPost">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div id="treeview">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Header</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="name" name="name" placeholder="Header" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Description</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="description" name="name" placeholder="Description" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Description1</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="description1" name="name" placeholder="Description1" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Description2</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="description2" name="name" placeholder="Description2" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Description3</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="description3" name="name" placeholder="Description3" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Description4</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="description4" name="name" placeholder="Description4" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Description5</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="description5" name="name" placeholder="Description5" required />
+                                    </div>
+                                </div>
+                              @*  <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Image Upload</label>
+                                        <input type="file" class="form-control" id="image"  />
+                                    </div>
+                                </div>*@
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <button type="button" id="SaveBtn" class="btn btn-primary">Save</button>
+
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+
+    <script>
+
+        var categoryId;
+
+        loadCategory()
+        function loadCategory() {
+            $('#treeview').jstree({
+                'core': {
+                    'data': {
+                        'url': '/Category/Nodes',
+                        'data': function (node) {
+                            return { 'id': node.id };
+                        }
+                    }
+                }
+            }).on('ready.jstree', function () {
+
+                var t = $('#treeview').jstree(true);
+                var n = t.get_node(categoryId);
+
+                t.select_node(n);
+                n = t.get_selected(true);
+                console.log(n[0].id, n[0]);
+            });
+
+
+            $('#treeview').on('changed.jstree', function (e, data) {
+                var i, j, r = [];
+                for (i = 0, j = data.selected.length; i < j; i++) {
+                    r.push(data.instance.get_node(data.selected[i]));
+                }
+                categoryId = r[0].id;
+            }).jstree();
+        }
+
+        $("#SaveBtn").click(function (e) {
+            if (!document.getElementById("formPost").checkValidity()) {
+                e.preventDefault();
+            } else {
+
+                //imgPath = '';
+                //var totalFiles = document.getElementById('image').files.length;
+                //if (totalFiles > 0) {
+                //    uploadFile();
+                //}
+
+                var model = {
+                    categoryId: parseInt(categoryId),
+                    header: $.trim($("#name").val()),
+                    description: $.trim($("#description").val()),
+                    description1: $.trim($("#description1").val()),
+                    description2: $.trim($("#description2").val()),
+                    description3: $.trim($("#description3").val()),
+                    description4: $.trim($("#description4").val()),
+                    description5: $.trim($("#description5").val()),
+
+                    createdBy: @Context.Session.GetInt32("UserId"),
+
+                }
+               
+                $.ajax({
+                    type: "POST",
+                    url: "@apiUrl/api/Websitepages/CreateWebsitepages",
+                    data: JSON.stringify(model),
+                    contentType: "application/json; charset=utf-8",
+
+                    dataType: "json",
+                    success: function (data, statusText, xhr) {
+                        if (xhr.status === 200) {
+                            // $('#section').DataTable().ajax.reload(null, false);
+                            sweetAlert({
+                                html: true,
+                                title: "Websitepage",
+                                text: "Successfully Created!",
+                                type: "success"
+                            }, function () {
+                                location.reload();
+                            });
+                        } else if (data.status === "duplicate") {
+                            sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                        } else if (data.status === "error") {
+                            sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                        } else {
+                            sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                        }
+                    },
+                    error: function (data) {
+                        if (data.status == 401) {
+                            window.location.replace('/Message/TokenExpire');
+                        } else if (data.status == 403) {
+                            window.location.replace('/Message/Unauthorize');
+                        } else if (data.status == 400) {
+                            sweetAlert("Validation Alert!", "Please check input data!", "warning");
+                        }
+                    }
+
+                });
+
+
+            }
+
+        });
+
+
+        function uploadFile() {
+            var totalFiles = document.getElementById('image').files.length;
+            if (totalFiles > 0) {
+                var formData = new FormData();
+                var files = document.getElementById('image').files;
+                formData.append("file", files[0]);
+                $.ajax(
+                    {
+                        url: "/Upload/ImgUpload",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        async: false,
+                        type: "POST",
+                        success: function (data) {
+                            imgPath = data;
+
+                        },
+                        error: function (data) {
+                            window.location.replace('/Message/SessionExpire');
+                        }
+                    }
+                );
+            }
+
+        }
+
+
+    </script>
+
+
+}

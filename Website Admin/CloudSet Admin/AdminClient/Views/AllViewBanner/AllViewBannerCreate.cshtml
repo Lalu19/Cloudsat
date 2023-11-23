@@ -1,0 +1,273 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "Banner Content Create";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+}
+
+<style>
+    .btn-primary {
+        color: #fff;
+        background: #3b16cc !important;
+        border-color: #3b16cc !important;
+    }
+
+    a {
+        color: #3b16cc;
+    }
+
+    .slide-menu a.active {
+        color: #3b16cc !important;
+    }
+
+    .sweet-alert button {
+        background-color: #0052cc !important;
+    }
+
+    button#bannersav {
+        margin-top: 31px;
+    }
+</style>
+
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="fe fe-pie-chart mr-1"></i> Admin Console</a></li>
+        <li class="breadcrumb-item active" aria-current="page">BannerContent Create</li>
+    </ol>
+    <div class="ml-auto">
+        <a href="~/AllViewBanner/AllViewBannerlist" class="btn btn-primary btn-icon btn-sm text-white mr-2">
+            <span>
+                <i class="fe fe-plus"></i>
+            </span> View 
+        </a>
+    </div>
+</div>
+
+
+<div class="col-md-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="col-md-11">
+                <div class="card-title">BannerContent Create</div>
+
+            </div>
+        </div>
+        <div class="card-body" id="section">
+            <div>
+                <form action="#" role="form" class="validate" id="formPost">
+                    <div class="row">
+                        <div class="col-lg-12">                                                     
+                            <div class="row">
+                                <div id="treeview">
+                                </div>
+                            </div>                                                      
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+
+                                <ejs-richtexteditor id="editor1" name="editor1" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" created="created" height="500px">
+                                    <e-content-template>
+
+                                    </e-content-template>
+                                    <e-richtexteditor-toolbarsettings items="@ViewBag.tools"></e-richtexteditor-toolbarsettings>
+                                    <e-richtexteditor-quicktoolbarsettings table="@ViewBag.table"></e-richtexteditor-quicktoolbarsettings>
+
+                                </ejs-richtexteditor>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <button type="button" id="bannersav" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
+<script>
+    var rteObj, myCodeMirror, textArea;
+    function created() {
+        rteObj = this;
+        textArea = rteObj.contentModule.getEditPanel();
+    }
+    function mirrorConversion(e) {
+        var id = rteObj.getID() + 'mirror-view';
+        var mirrorView = rteObj.element.querySelector('#' + id);
+        var charCount = rteObj.element.querySelector('.e-rte-character-count');
+        if (e.targetItem === 'Preview') {
+            textArea.style.display = 'block';
+            mirrorView.style.display = 'none';
+            textArea.innerHTML = myCodeMirror.getValue();
+            charCount.style.display = 'block';
+        }
+        else {
+            if (!mirrorView) {
+                mirrorView = ej.base.createElement('div', { className: 'e-content' });
+                mirrorView.id = id;
+                textArea.parentNode.appendChild(mirrorView);
+            }
+            else {
+                mirrorView.innerHTML = '';
+            }
+            textArea.style.display = 'none';
+            mirrorView.style.display = 'block';
+            renderCodeMirror(mirrorView, defaultRTE.value);
+            charCount.style.display = 'none';
+        }
+    }
+    function renderCodeMirror(mirrorView, content) {
+        myCodeMirror = CodeMirror(mirrorView, {
+            value: content,
+            lineNumbers: true,
+            mode: 'text/html',
+            lineWrapping: true,
+        });
+    }
+    function handleFullScreen(e) {
+        var sbCntEle = document.querySelector('.sb-content.e-view');
+        var sbHdrEle = document.querySelector('.sb-header.e-view');
+        if (e.targetItem === 'Maximize') {
+            if (ej.base.Browser.isDevice && ej.base.Browser.isIos) {
+                ej.base.addClass([sbCntEle, sbHdrEle], ['hide-header']);
+            }
+        }
+        else if (e.targetItem === 'Minimize') {
+            if (ej.base.Browser.isDevice && ej.base.Browser.isIos) {
+                ej.base.removeClass([sbCntEle, sbHdrEle], ['hide-header']);
+            }
+        }
+    }
+    function actionCompleteHandler(e) {
+        if (e.targetItem && (e.targetItem === 'SourceCode' || e.targetItem === 'Preview')) {
+            this.sourceCodeModule.getPanel().style.display = 'none';
+            mirrorConversion(e);
+        }
+        else {
+            setTimeout(function () { rteObj.toolbarModule.refreshToolbarOverflow(); }, 1000);
+        }
+    }
+</script>
+
+@section scripts{
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+   
+    <script>
+        var categoryId;
+
+
+        function showTable() {
+            $('#tableView').show();
+            $('#treeview').hide();
+        }
+        function showTree() {
+            $('#tableView').hide();
+            $('#treeview').show();
+        }
+
+
+        $(function () {
+            $('#treeview').jstree({
+                'core': {
+                    'data': {
+                        'url': '/AllViewBanner/WithPrimaryNodes',
+                        'data': function (node) {
+                            return { 'id': node.id };
+                        }
+                    }
+                }
+            });
+
+
+            $('#treeview').on('changed.jstree', function (e, data) {
+                var i, j, r = [];
+                for (i = 0, j = data.selected.length; i < j; i++) {
+                    r.push(data.instance.get_node(data.selected[i]));
+
+                }
+                categoryId = r[0].id;
+
+
+                // $('#event_result').html('Selected: ' + r.join(', '));
+            }).jstree();
+
+
+            $("#bannersav").click(function (e) {
+                if (!document.getElementById("formPost").checkValidity()) {
+                    e.preventDefault();
+                } else {
+                    if (categoryId != null) {
+                        if (categoryId == 0) {
+                            categoryId = null;
+                        }
+
+                        var model = {
+                            categoryId: parseInt(categoryId),
+                            text: rteObj.value,
+                            createdBy: @Context.Session.GetInt32("UserId"),
+                        };
+
+                       
+                        $.ajax({
+                            type: "POST",
+                            url: "@apiUrl/api/AllViewBanner/uploadAllViewBanner",
+                            data: JSON.stringify(model),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (data, statusText, xhr) {
+                                console.log(data);
+                                if (xhr.status === 200) {
+                                    sweetAlert({
+                                        html: true,
+                                        title: "Banner Content",
+                                        text: "Successfully Created!",
+                                        type: "success",
+                                    }, function () {
+                                        location.reload();
+                                    });
+                                } else if (data.status === "duplicate") {
+                                    sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                                } else if (data.status === "error") {
+                                    sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                                } else {
+                                    sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                                }
+                            },
+                            error: function (data) {
+                                if (data.status == 401) {
+                                    window.location.replace('/Message/TokenExpire');
+                                } else if (data.status == 403) {
+                                    window.location.replace('/Message/Unauthorize');
+                                } else if (data.status == 400) {
+                                    sweetAlert("Validation Alert!", "Please check input data!", "warning");
+                                }
+                            },
+                            complete: function () {
+                                // Scroll to the top of the page
+                                $("html, body").animate({ scrollTop: 0 }, "slow");
+                            }
+                        });
+                    } else {
+                        sweetAlert("Validation Alert!", "Please Select Parent Category", "warning");
+                    }
+                }
+            });
+
+
+
+        });
+
+       
+
+    </script>
+}

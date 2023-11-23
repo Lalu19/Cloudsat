@@ -1,0 +1,245 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "About Us";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+    string ImageUrl = Configuration.GetValue<string>("WebImage");
+    Layout = "_Layout";
+}
+
+
+<style>
+    @@keyframes slide {
+        0% {
+            left: 0%;
+        }
+
+        9% {
+            left: 0%;
+        }
+
+        18% {
+            left: -100%;
+        }
+
+        27% {
+            left: -100%;
+        }
+
+        36% {
+            left: -200%;
+        }
+
+        45% {
+            left: -200%;
+        }
+
+        54% {
+            left: -300%;
+        }
+
+        63% {
+            left: -300%;
+        }
+
+        72% {
+            left: -400%;
+        }
+
+        81% {
+            left: -400%;
+        }
+
+        100% {
+            left: -400%;
+        }
+    }
+
+    #slider {
+        overflow: hidden;
+        margin-top: 91px;
+    }
+
+        #slider figure {
+            position: relative;
+            width: 600%;
+            margin: 0px;
+            left: 0px;
+            text-align: left;
+            animation: 30s slide infinite;
+        }
+
+
+    #slidy {
+        height: 450px;
+    }
+
+    #slider figure img {
+        float: left;
+        width: 16.6666%;
+        height: 400px;
+    }
+
+    .spdtb {
+        padding-top: -31px;
+        padding-bottom: 50px;
+    }
+
+    img.bannerslideimg {
+        width: 600%;
+        margin: 0px;
+        left: 0px;
+        height: 450px;
+    }
+
+    input.radiobutton {
+        height: 23px;
+        line-height: 16px;
+        padding: 0px 0px;
+        background-color: var(--sala-shade-background, #F8F9FC);
+        color: var(--sala-neutral-dark, #111111);
+        border: 0;
+        cursor: pointer;
+        border-radius: 3px;
+        width: 4%;
+    }
+
+    .checkbutton {
+        text-align: center;
+        margin-bottom: 35px;
+    }
+
+    div#rbg {
+        text-align: center;
+        margin: 0px 0 40px 0px;
+    }
+
+    @@media (min-width: 498px) and (max-width: 850px) {
+        svg {
+            vertical-align: middle;
+            margin-left: 136px !important;
+            margin-top: -62px;
+        }
+    }
+
+    @@media (min-width: 200px) and (max-width: 497px) {
+        svg {
+            vertical-align: middle;
+            margin-left: 171px;
+            margin-top: -67px;
+            margin-right: 113px;
+        }
+    }
+
+    @@media (max-width: 1000px) {
+        img.weblogo {
+            margin: 0px 0px -15px 0px !important;
+            width: 89px;
+        }
+    }
+</style>
+
+
+<div id="slider">
+    <figure id="slidy" class="bannerslider">
+        @*  <img src="http://media.newjobs.com/mm/xvaderinnlx/cjt2/slide1.jpg" />
+            <img src="http://media.newjobs.com/mm/xvaderinnlx/cjt2/slide2.jpg" />
+            <img src="http://media.newjobs.com/mm/xvaderinnlx/cjt2/slide3.png" />
+            <img src="http://media.newjobs.com/mm/xvaderinnlx/cjt2/slide4.jpg" />
+            <img src="http://media.newjobs.com/mm/xvaderinnlx/cjt2/slider5.jpg" />*@
+    </figure>
+</div>
+
+<main id="main" class="site-main">
+    <div class="site-content pt0 pb0">
+        <section class="section spdt">
+            <div class="container">
+                <div class="heading align-center">
+                    <h2 class="heading-title size-l">About US</h2>
+                </div>
+                <div class="block-icon-box layout-01">
+                    <div class="row">
+
+                        <p id="contentpage"></p>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+@section scripts{
+    <script>
+        getHomeBannerImagelist()
+        function getHomeBannerImagelist() {
+            $.ajax(
+                {
+                    url: "@apiUrl/api/AboutUs/GetAbboutUsList",
+                    type: "GET",
+                    success: function (data) {
+                        //console.log(data);
+                        if (data.data.length == 1) {
+                            var d = '<img class="bannerslideimg" src ="@ImageUrl' + data.data[0]['imageUpload'] + '" alt = "Image">'
+
+                            $('#slider').html(d);
+                        }
+
+                        else {
+                            var x = '';
+                            for (var l = 0; l < data.data.length; l++) {
+
+                                x = x + '<img class="bannerslideimg" src ="@ImageUrl' + data.data[l]['imageUpload'] + '" alt = "Image">'
+
+                            }
+                            $('.bannerslider').html(x);
+                        }
+
+
+                    },
+
+                    error: function (err) {
+                        console.log(err);
+
+                    }
+                }
+            );
+
+        }
+
+
+
+    </script>
+
+
+    <script>
+
+        getHometermcontentlist()
+        function getHometermcontentlist() {
+            $.ajax(
+                {
+                    url: "@apiUrl/api/AboutUs/GetAbboutUsList",
+                    type: "GET",
+                    success: function (data) {
+
+                        for (var i = 0; i < data.data.length; i++) {
+                            var textcontent = data.data[i]["text"];
+                        }
+                        $('#contentpage').html(textcontent);
+
+                    },
+
+                    error: function (err) {
+                        console.log(err);
+
+                    }
+                }
+            );
+
+        }
+    </script>
+
+
+}

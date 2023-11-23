@@ -1,0 +1,1581 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    <!-- Style CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="shortcut icon" href="~/assets/images/Final Logo.png" type="image/png">
+
+    <link rel="stylesheet" href="~/assets/libs/line-awesome/css/line-awesome.min.css">
+    <link rel="stylesheet" href="~/assets/libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/libs/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   
+
+    <style>
+        .site-header .main-menu > ul > li > a {
+            font-weight: 600;
+        }
+
+        .footer-bottom .inner {
+            border-top: 2px solid #89816e;
+            padding: 10px 20px 10px 0;
+        }
+
+        ul.sub-menu.loginsubmenu {
+            font-weight: 600;
+            width: 200px !important;
+            text-align: left !important;
+            padding: 10px 0;
+            background-color: var(--sala-neutral-white, #ffffff);
+            box-shadow: var(--sala-boxshadow);
+            margin: -8px 0px 0px -40px !important;
+            border-top: solid #0a16ff 4px
+        }
+
+        .site-header {
+            padding-top: 0px;
+            padding-bottom: 0px;
+            background-color: var(--sala-neutral-white, #ffffff);
+        }
+
+        header.site-header.topheader {
+            background-color: #f05f14;
+            padding-top: 0px;
+            padding-bottom: 0px;
+        }
+
+        .fixedmainhederbor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+        }
+
+        .site-header {
+            background-color: #ffffff;
+            transition: background-color 0.3s ease;
+        }
+
+        .fixedmainhederbor .site-header {
+            background-color: #ffffff;
+        }
+
+        .footer-top {
+            border-top: 2px solid #b6c6d7;
+            padding: 60px 0;
+        }
+
+        img.weblogo {
+            width: 50%;
+        }
+
+        span.bar {
+            border: solid black 1px;
+            padding: 19px 0px 3px 0px;
+            margin: 0px 5px 0px 5px;
+        }
+
+        .footer-top .footer-newsletter p {
+            font-size: 13px;
+            color: var(--sala-neutral-normal, #555555);
+            line-height: 1.44;
+            margin-bottom: 22px;
+            text-align: justify;
+        }
+
+        a.button.fullfield.Live {
+            height: 39px;
+            border: 0px solid transparent;
+            padding: 0px 10px;
+            font-size: 16px;
+            line-height: 1.5;
+            border-radius: 10px;
+            transition: all 0.3s;
+            font-weight: 700;
+        }
+
+            a.button.fullfield.Live:hover {
+                background-color: #f05f14;
+            }
+
+        .button.fullfield {
+            height: 39px;
+            border: 2px solid transparent;
+            padding: 0px 10px;
+            font-size: 13px;
+            line-height: 1.5;
+            border-radius: 10px;
+            transition: all 0.3s;
+            font-weight: 700;
+        }
+
+        .button.fullfield {
+            background-color: #ffffff;
+            border-color: var(--sala-primary-navy, #0057fc);
+            color: #000000;
+        }
+
+            .button.fullfield:hover {
+                color: white;
+            }
+
+        .section-pricing.background-grey .pricing-table.layout-03 .inner {
+            background-color: #ebebeb;
+        }
+
+        .site-header .buttons {
+            margin-left: 0px;
+        }
+
+        span.loginclass {
+            font-weight: 600 !important;
+        }
+
+        ul.sub-menu.submegamenu {
+            margin: -30px 0 0 0;
+        }
+
+        img.footerLogo {
+            width: 54%;
+            padding: 0 0 9px 0px;
+        }
+
+        .footer-top .footer-menu h6 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+
+        ul.sub-menu.submegamenu.open {
+            margin: 0px 0 0 0;
+        }
+
+        .logo {
+            padding: 0 0 20px 0;
+        }
+
+        .site-header .main-menu .is-mega-menu .sub-menu .mega-menu {
+            border-top: solid #0a16ff 4px;
+            box-shadow: 2rem 2rem 2.25rem rgb(30 34 40 / 50%);
+            padding: 14px;
+            text-align: left;
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: var(--sala-neutral-white, #ffffff);
+            border-radius: 5px;
+        }
+
+        ul.sub-menu.normal-menu {
+            border-top: solid #0a16ff 4px;
+        }
+
+        .site-header .main-menu .is-normal-menu .sub-menu {
+            margin: -23px 0 0 0;
+            box-shadow: 2rem 2rem 2.25rem rgb(30 34 40 / 50%);
+        }
+
+        a.topcategory:hover {
+            background-color: #f0641b;
+            color: white;
+        }
+
+        @@media(min-width: 1001px) and (max-width: 3900px) {
+            img.weblogo {
+                margin: 0px 0px -15px 70px !important;
+            }
+        }
+
+        .site-header .main-menu .is-mega-menu .sub-menu .mega-menu .mega-menu-item {
+            max-width: 270px;
+            padding-left: 10px;
+            padding-right: 0px;
+        }
+
+            .site-header .main-menu .is-mega-menu .sub-menu .mega-menu .mega-menu-item h6 {
+                font-size: 14px;
+                font-weight: 600;
+                text-transform: none;
+                letter-spacing: 1.2px;
+                margin-bottom: 20px;
+            }
+
+
+        .footer-top {
+            border-top: 2px solid #b6c6d7;
+            padding: 60px 0;
+            background-color: #ebebeb;
+        }
+    </style>
+    <style>
+        @@media(min-width: 1001px) and (max-width: 1450px) {
+            ul#GetmainMenu {
+                width: 121%;
+                margin: 0px 0px 0px -31px;
+                /* padding: 0px 1px 0 0; */
+            }
+        }
+
+        a.companyurl:hover {
+            color: #0a16ff;
+        }
+
+        a.bacgroundcolor:hover {
+            color: #0a16ff !important;
+            padding: 10px 10px 10px 10px;
+            transition: all 0.5s ease 0s;
+        }
+
+        .row.footeraddresss.bacgroundcolor {
+            color: black;
+        }
+
+        a.bacgroundcolor {
+            color: black;
+        }
+
+        h6.bacgroundcolor {
+            color: black;
+        }
+
+        p.footeraddress {
+            text-align: left;
+            padding: 0 0 10px 0;
+        }
+
+        i.fa.fa-phone {
+            padding: 0 15px 0 0;
+            color: black;
+        }
+
+        .center {
+            background-color: #f05f14;
+        }
+
+        p.bacgroundcolor {
+            color: black !important;
+        }
+
+        p.footeraddress {
+            line-height: 31px;
+        }
+
+        i.fa.fa-envelope {
+            padding: 0 13px 0 0px;
+            color: black;
+        }
+
+        div#footercontent {
+            background-color: white;
+        }
+
+        h3.bacgroundcolor {
+            color: black;
+        }
+
+        a.companyurl {
+            color: black;
+        }
+
+        .childchildmenu:hover {
+            background-color: gray;
+            color: white;
+        }
+
+        a.childchildmenuss:hover {
+            color: white;
+        }
+
+        .style {
+            padding: 0px 0px 0px 18px;
+        }
+    </style>
+
+    <style>
+
+
+        @@media (max-width: 1000px) {
+            img.weblogo {
+                margin: 0px 0px -15px 70px !important;
+            }
+        }
+
+        @@media (max-width: 767px) {
+            .footer-top {
+                padding: 30px 0;
+            }
+
+            @@media (max-width: 767px) img.weblogo {
+                width: 75%;
+                margin: 0;
+            }
+
+            span.bar {
+                display: none;
+            }
+
+            .footer-top .footer-newsletter p {
+                font-size: 12px;
+                margin-bottom: 16px;
+            }
+
+            a.button.fullfield.Live,
+            .button.fullfield {
+                font-size: 12px;
+                height: 34px;
+                padding: 0 8px;
+            }
+
+            .site-header .main-menu > ul > li > a {
+                font-size: 14px;
+            }
+
+            ul.sub-menu.loginsubmenu {
+                width: auto !important;
+                margin: -8px 0px 0px 0 !important;
+            }
+
+            .site-header .main-menu .is-mega-menu .sub-menu .mega-menu-item h6 {
+                font-size: 13px;
+                margin-bottom: 16px;
+            }
+
+            .site-header .main-menu .is-mega-menu .sub-menu .mega-menu-item {
+                max-width: 100%;
+                padding-left: 10px;
+                padding-right: 0px;
+            }
+        }
+
+        @@media (max-width: 576px) {
+            .footer-top .footer-menu h6 {
+                font-size: 16px;
+                margin-bottom: 20px;
+            }
+
+            .site-header .main-menu > ul > li > a {
+                font-size: 12px;
+            }
+
+            .site-header .main-menu .is-mega-menu .sub-menu .mega-menu-item h6 {
+                font-size: 12px;
+            }
+        }
+
+    </style>
+    @*<style>
+        /* Add the following CSS styles to your stylesheet */
+
+        .navbar-toggler {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .icon-bar {
+            display: block;
+            width: 22px;
+            height: 2px;
+            margin-bottom: 4px;
+            position: relative;
+            background-color: #111111;
+            transition: all 0.3s ease;
+        }
+
+        .icon-bar-first {
+            transform-origin: 0% 0%;
+        }
+
+        .icon-bar-two {
+            opacity: 1;
+        }
+
+        .icon-bar-three {
+            transform-origin: 0% 100%;
+        }
+
+        .navbar-toggler.collapsed .icon-bar {
+            background-color: #111111;
+        }
+
+        .navbar-toggler.collapsed .icon-bar-first {
+            transform: translate(0px, 1px) rotate(0deg);
+        }
+
+        .navbar-toggler.collapsed .icon-bar-two {
+            opacity: 1;
+        }
+
+        .navbar-toggler.collapsed .icon-bar-three {
+            transform: translate(0px, -1px) rotate(0deg);
+        }
+
+        .header-nav {
+            display: none;
+        }
+
+        @@media (max-width: 767px) {
+            .header-nav.collapse.show {
+                display: block;
+            }
+        }
+        /* Add the following CSS styles to your stylesheet */
+
+        .d-lg-none {
+            display: none;
+        }
+
+        @@media (max-width: 991px) {
+            .d-lg-none {
+                display: block;
+            }
+        }
+
+        @@media(min-width: 990px) and (max-width: 1100px) {
+            .site-header .main-menu > ul > li > a {
+                font-weight: 600;
+                margin: -6px;
+                padding: 10px;
+            }
+
+            .heading .heading-desc {
+                margin-top: 61px;
+                margin-bottom: -76px;
+            }
+        }
+
+        @@media(min-width: 280px) and (max-width: 1000px) {
+            .navbar-toggler {
+                display: block;
+                margin-top: -37px;
+            }
+
+            img.weblogo {
+                width: 31%;
+            }
+
+            .heading .heading-desc {
+                font-size: 18px;
+                line-height: 1.44;
+                font-weight: 400;
+                margin-top: -110px;
+                padding-top: 64px;
+            }
+        }
+
+    </style>
+
+    <style>
+        @@media (max-width: 991px) {
+            .canvas-menu.active .icon-bar {
+                background-color: #111111;
+            }
+
+                .canvas-menu.active .icon-bar:before {
+                    top: 6px;
+                    transform: rotate(-45deg);
+                }
+
+                .canvas-menu.active .icon-bar:after {
+                    top: -6px;
+                    transform: rotate(45deg);
+                }
+        }
+
+        @@media (max-width: 992px) {
+            .site-header .main-menu > ul {
+                transition: all 0.3s;
+                margin-right: 222px;
+            }
+        }
+        /* @@media (max-width: 992px){
+             .site-header .main-menu {
+               margin-right: 132px;
+              }
+           }*/
+        @@media (max-width: 992px) {
+            .site-header .main-menu .sub-menu {
+                position: absolute;
+                left: 46%;
+                top: 0;
+                width: 8%;
+                right: auto;
+                bottom: auto;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                font-size: small;
+                font-weight: 100;
+            }
+        }
+    </style>*@
+
+   @* <style>
+        @@media(min-width: 200px) and (max-width: 1000px) {
+            .site-header .main-menu .is-active > ul > li a {
+                font-size: 10px;
+                font-weight: 100;
+                padding: 10px 18px;
+                display: block;
+                line-height: 1.1;
+                margin-left: 179px !important;
+            }
+
+            .site-header .main-menu .is-mega-menu .sub-menu .mega-menu .mega-menu-item .is-active h6 {
+                font-size: 14px;
+                font-weight: 200;
+                text-transform: none;
+                letter-spacing: 1.2px;
+                margin-bottom: -26px;
+                margin-left: 224px !important;
+            }
+
+            .site-header .main-menu .is-mega-menu .sub-menu .mega-menu ul.sub-menu.open .is-active {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: all;
+                margin-left: 184px !important;
+                margin-top: -41px !important;
+            }
+
+            .site-header .main-menu.is-active {
+                opacity: 1;
+                visibility: visible;
+                transform: translateX(0);
+            }
+
+            .site-header .main-menu .is-active {
+                position: fixed;
+                top: -13px;
+                left: 0;
+                right: 197px;
+                bottom: 0;
+                z-index: 99;
+                background-color: var(--sala-neutral-white, #ffffff);
+                transition: all 0.3s;
+            }
+
+            .site-header .header-center {
+                text-align: left;
+            }
+
+            .site-header .main-menu .menu-action .item {
+                cursor: pointer;
+            }
+
+            .site-header .main-menu .menu-action i {
+                font-size: 28px;
+                color: var(--sala-neutral-dark, #111111);
+            }
+
+            .site-header .main-menu > ul > li {
+                display: block;
+            }
+
+            .site-header .main-menu .is-mega-menu .sub-menu .mega-menu .mega-menu-item h6 {
+                font-size: 14px;
+                font-weight: 600;
+                text-transform: none;
+                letter-spacing: 1.2px;
+                margin-bottom: 20px;
+                margin-left: 67px;
+                white-space: nowrap;
+                margin-top: -15px;
+            }
+
+            .site-header .main-menu .toggle-sub-menu {
+                cursor: pointer;
+            }
+
+                .site-header .main-menu .toggle-sub-menu:after {
+                    content: "\f107";
+                    font-family: "Line Awesome Free";
+                    margin-left: 8px;
+                    color: var(--sala-neutral-normal, #555555);
+                    vertical-align: 2px;
+                    font-size: 12px;
+                    font-weight: 900;
+                }
+
+                .site-header .main-menu .toggle-sub-menu:after {
+                    display: inline-block;
+                    padding: 0 10px;
+                    vertical-align: 6px;
+                    transform: rotate(-90deg);
+                }
+
+            .site-header .main-menu .sub-menu .is-active {
+                position: absolute;
+                left: 100%;
+                top: 0;
+                width: 100%;
+                right: auto;
+                bottom: auto;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+            }
+
+            .site-header .main-menu > ul > li:hover > .sub-menu {
+                top: 0;
+                width: 100%;
+            }
+
+            .site-header .main-menu > ul > li:hover > .sub-menu {
+                top: calc(100% + 30px);
+                opacity: 1;
+                visibility: visible;
+                pointer-events: all;
+                z-index: 2;
+            }
+
+            .site-header .main-menu .is-mega-menu .sub-menu .mega-menu .is-active {
+                box-shadow: none;
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+                display: block;
+            }
+
+
+
+            .site-header .main-menu .is-mega-menu .sub-menu .mega-menu ul.sub-menu.open {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: all;
+                margin-left: 110px;
+                margin-top: -250px;
+                white-space: nowrap;
+            }
+
+            .site-header .main-menu > ul > li a {
+                font-size: 13px;
+                font-weight: 200;
+                padding: 6px 20px;
+                display: block;
+                line-height: 1.1;
+            }
+
+            .d-lg-none {
+                display: block;
+                margin-top: -30px;
+            }
+
+            svg {
+                vertical-align: middle;
+                margin-left: -305px;
+                margin-top: -19px;
+            }
+
+            a {
+                text-decoration: none;
+                color: var(--sala-primary-dark, #111111);
+            }
+
+            .la, .las {
+                font-family: 'Line Awesome Free';
+                font-weight: 900;
+                -webkit-font-smoothing: antialiased;
+                display: inline-block;
+                font-style: normal;
+                font-variant: normal;
+                text-rendering: auto;
+                line-height: 1;
+            }
+
+            .la-arrow-left:before {
+                content: "\f060";
+            }
+
+            .site-header .main-menu > ul {
+                transition: all 0.3s;
+            }
+
+            ul {
+                list-style: none;
+                letter-spacing: -0.3em;
+            }
+        }
+    </style>*@
+
+
+   <style>
+       
+        .site-header.layout-02 .main-menu .sub-menu.open > ul > li a {
+            font-size: 19px;
+            font-weight: 200;
+            padding: 10px 18px;
+            display: block;
+            line-height: 1.1;
+            white-space: nowrap;
+        }
+
+        .site-header .main-menu .is-mega-menu .sub-menu .mega-menu {
+            /* border-top: solid #0a16ff 4px; */
+            /* box-shadow: 2rem 2rem 2.25rem rgb(30 34 40 / 50%); */
+            /* padding: 14px; */
+            /* text-align: left; */
+            /* max-width: 950px; */
+            /* margin: 0 auto; */
+            /* background-color: var(--sala-neutral-white, #ffffff); */
+            /* border-radius: 5px; */
+        }
+
+        .site-header .main-menu .is-mega-menu .sub-menu.sub-menu.open .mega-menu-item h6 {
+            font-size: 19px;
+            margin-bottom: 21px;
+            white-space: normal;
+            font-weight: 400;
+        }
+
+        .site-header.layout-02 .main-menu .is-mega-menu .sub-menu .mega-menu .sub-menu.open.mega-menu-item h6 {
+            font-size: 19px;
+            font-weight: 200;
+            text-transform: capitalize;
+            padding: 10px 18px;
+            line-height: 1.1;
+            margin-bottom: 0;
+            white-space: nowrap;
+        }
+
+        svg {
+            vertical-align: middle;
+            margin-left: -140px;
+            margin-top: -12px;
+        }
+
+       @@media (max-width: 992px){
+         .site-header .main-menu > ul > li a {
+           font-size: 19px;
+           font-weight: 200;
+           padding: 10px 18px;
+           display: block;
+           line-height: 1.1;
+         }
+       }
+       @@media (max-width: 992px){
+         .site-header .main-menu > ul > li {
+             display: block;
+             text-align: center;
+         }
+
+            li.is-normal-menu.has-sub-menu {
+                margin-right: -41px;
+            }
+       }
+
+       
+        @@media (max-width: 992px){
+         .site-header .main-menu .is-normal-menu {
+             position: static;
+             margin-left: -37px;
+         }
+        }
+
+        @@media(min-width: 992px) and (max-width: 1022px) {
+          .site-header .main-menu > ul > li:last-child {
+              margin-right: -5px;
+          }
+        }
+
+        @@media(min-width: 260px) and (max-width: 1100px) {
+            svg {
+                vertical-align: middle;
+                margin-left: -140px;
+                margin-top: -12px;
+            }
+        
+        }
+        @@media (max-width: 1000px){
+         img.weblogo {
+             margin: 0px 0px -15px 70px !important;
+             width: 89px;
+         }
+
+            svg {
+                vertical-align: middle;
+                margin-left: -486px;
+                margin-top: -62px;
+            }
+
+            .site-header .canvas-menu {
+                display: block;
+                height: 5px;
+            }
+        }
+        @@media (min-width: 992px) and (max-width: 1032px){
+            ul#GetmainMenu {
+                width: 115%;
+                margin: -10px 36px -46px -130px;
+            }
+
+            img.weblogo {
+                margin: -4px -4px -25px 0px !important;
+            }
+
+            .site-header .main-menu > ul > li > a {
+                padding: 0px 10px;
+                margin-right: -5px;
+                margin-top: -9px;
+            }
+
+            .site-header .main-menu > ul > li:last-child {
+                margin-right: -117px;
+            }
+
+            span.loginclass {
+                font-weight: 600 !important;
+                margin-left: -48px;
+            }
+        }
+
+        @@media (min-width: 498px) and (max-width: 850px) {
+           svg {
+               vertical-align: middle;
+               margin-left: 136px !important;
+               margin-top: -62px;
+           }
+        }
+
+       @@media (min-width: 200px) and (max-width: 497px) {
+        svg {
+            vertical-align: middle;
+            margin-left: -101px;
+            margin-top: -62px;
+        }
+       }
+    </style>
+
+</head>
+<body>
+    <div id="wrapper">
+        <div class="fixedmainhederbor">
+
+            <header class="site-header topheader">
+                <div class="container-fluid">
+                    <div class="row flex-align-c inner">
+                        <div class="col-lg-12 ">
+                            <div>
+                                <div class="logo topheaderss">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <header id="header" class="site-header">
+
+                <div class="container-fluid">
+                    <div class="row flex-align-c inner">
+                        <div class="col-lg-3 col-6">
+                            <div class="header-left flex flex-align-c">
+
+                                <div class="logo">
+                                    <a href="~/Home/Index">
+                                        <img class="weblogo" src="~/assets/images/csat-logo.png" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-0 text-center">
+                            <div class="header-center">
+                                <div class="main-menu">
+                                    
+                                    <ul id="GetmainMenu">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="header-right flex flex-align-c flex-content-e">
+                                @*<div class="customer">
+                                <a href="sign-in.html"><i class="las la-user-circle"></i><span class="loginclass">Login</span></a>
+
+                                </div>*@
+                                <div class="main-menu">
+                                    <ul>
+                                        <li class="is-normal-menu">
+                                            <div class="customer">
+                                                <a href="~/Home/Index" class="button fullfield Live"><i class="las la-headset"></i><span class="loginclass">Login</span></a>
+                                            </div>
+                                            <ul class="sub-menu loginsubmenu">
+                                                <li><a href="~/Home/Index">Cloud Dashboard</a> </li>
+                                                <li><a href="~/Home/Index">Self-hosted Portal</a> </li>
+                                                <li> <a href="~/Home/Index">Partner Portal</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <span class="bar"></span>
+                                <div class="buttons">
+                                    <a href="~/Home/Registration" class="button fullfield Live"><i class="las la-headset"></i><span>Live Demo</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 d-lg-none">
+                          <div class="container">
+                              <div class="row flex-align-c inner">
+                                  <div class="col-lg-6 col-6">
+                                      <div class="header-right align-right">
+                                          <div class="canvas-menu">
+                                              <div class="icon">
+                                                  <a href="#">
+                                                      <svg width="30px" height="14px"version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                              <g transform="translate(-50.000000, -33.000000)" fill="#111111">
+                                                                  <g id="off-menu" transform="translate(50.000000, 28.000000)">
+                                                                      <g id="icon-menu" transform="translate(0.000000, 5.000000)">
+                                                                          <rect id="Rectangle-1" x="0" y="0" width="30" height="3" rx="1.5"></rect>
+                                                                          <rect id="Rectangle-2" x="0" y="11" width="20" height="3" rx="1.5"></rect>
+                                                                      </g>
+                                                                  </g>
+                                                              </g>
+                                                          </g>
+                                                      </svg>
+                                                  </a>
+                                              </div>
+                                          </div>
+                                          <div class="main-menu">
+                                              <div class="menu-action">
+                                                  <span class="item menu-back"><i class="las la-arrow-left"></i></span>
+                                                    <a href="~/Home/Index"> <span class="item menu-close"><i class="las la-times"></i></span></a>
+                                              </div>
+
+                                                <ul>
+                                                    <li class="is-mega-menu">
+                                                        <a href="../Home/ViewPage?categoryId=23">Product</a>
+                                                        <ul class="sub-menu">
+                                                            <li>
+                                                                <div >
+                                                                    <div class="mega-menu-item">
+                                                                        <h6 class="mega-head">ERP(Corporate Solutions)</h6>
+                                                                        <ul class="sub-menu">
+                                                                            <li><a href="../Home/ViewPage?categoryId=28">CRM</a></li>
+                                                                            <li><a href="../Home/ViewPage?categoryId=29">HRMS</a></li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=30">
+                                                                                    Employee Management
+                                                                                </a>
+                                                                            </li>
+                                                                            <li><a href="../Home/ViewPage?categoryId=31">Accounting</a></li>
+                                                                            <li><a href="../Home/ViewPage?categoryId=32">Stock & Inventory</a></li>
+
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="mega-menu-item">
+                                                                        <h6 class="mega-head">
+                                                                            Other Solutions
+                                                                        </h6>
+                                                                        <ul class="sub-menu">
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=33">
+                                                                                    Attendance & Payroll Software
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=34">
+                                                                                    Sale Force Automation
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=35">
+                                                                                    Billing Software
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=36">
+                                                                                    GST Software
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=37">
+                                                                                    Inventory Software
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=38">
+                                                                                    Invoice Software
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=39">
+                                                                                    Accounting Software
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="mega-menu-item">
+                                                                        <h6 class="mega-head">
+                                                                            Mobile Apps
+                                                                        </h6>
+                                                                        <ul class="sub-menu">
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=66">
+                                                                                    e-Owner App
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=67">
+                                                                                    e-Retailer App
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=68">
+                                                                                    e-Attendance App
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=69">
+                                                                                    e-Reporting App
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=70">
+                                                                                    GPS Tracking
+                                                                                </a>
+                                                                            </li>
+
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="mega-menu-item">
+                                                                        <h6 class="mega-head">
+                                                                            Email Marketing
+                                                                        </h6>
+                                                                        <ul class="sub-menu">
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=72">
+                                                                                    Bulk Email Marketing
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=73">
+                                                                                    Promotional Campaigning
+                                                                                </a>
+                                                                            </li>
+                                                                            <li><a href="../Home/ViewPage?categoryId=74">Corporate Email Account</a></li>
+
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="is-mega-menu">
+                                                        <a href="../Home/ViewPage?categoryId=40">Software</a>
+                                                        <ul class="sub-menu">
+                                                            <li>
+                                                                <div >
+                                                                    <div class="mega-menu-item">
+                                                                        <h6 class="mega-head">
+                                                                            Retail Chain Software
+                                                                        </h6>
+                                                                        <ul class="sub-menu">
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=44">
+                                                                                    Pharmacy Shop Software
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=45">
+                                                                                    Grocery Shop Software
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=46">
+                                                                                    POS Software
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=47">
+                                                                                    Restaurant Software
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=48">
+                                                                                    Garment Software
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="mega-menu-item">
+                                                                        <h6 class="mega-head">
+                                                                            Distribution Software
+                                                                        </h6>
+                                                                        <ul class="sub-menu">
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=49">
+                                                                                    Pharma Distribution Software
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=50">
+                                                                                    FMCG Distribution Software
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=51">
+                                                                                    Mandi Software
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=52">
+                                                                                    Wholesale Distribution Software
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=53">
+                                                                                    Warehouse Management Software
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=54">
+                                                                                    Automobile Software
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=55">
+                                                                                    Supply Chain Management
+
+
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="mega-menu-item">
+                                                                        <h6 class="mega-head">
+                                                                            Manufacturing Management Software
+                                                                        </h6>
+                                                                        <ul class="sub-menu">
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=56">
+                                                                                    All in One ERP Software
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=57">
+                                                                                    Process Manufacturing Software
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=58">
+                                                                                    Food & Beverage Industry Software
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=59">
+                                                                                    Assembling Industry Software
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="../Home/ViewPage?categoryId=60">
+                                                                                    Textile Industry Software
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="is-mega-menu">
+                                                        <a href="../Home/ViewPage?categoryId=71">Desktop Monitoring</a>
+                                                    </li>
+                                                    <li class="is-mega-menu">
+                                                        <a href="../Home/ViewPage?categoryId=75">Resources</a>
+                                                        <ul class="sub-menu">
+                                                            <li>
+                                                                <div >
+                                                                    <div class="mega-menu-item">
+                                                                        <h6 class="mega-head">
+                                                                            <a href="../Home/ViewPage?categoryId=76">Question & Answer</a>
+                                                                        </h6>
+
+                                                                    </div>
+                                                                    <div class="mega-menu-item">
+                                                                        <h6 class="mega-head">
+                                                                            <a href="../Home/ViewPage?categoryId=77"> Training & Certifications</a>
+                                                                        </h6>
+
+                                                                    </div>
+                                                                    <div class="mega-menu-item">
+                                                                        <h6 class="mega-head">
+                                                                            <a href="../Home/ViewPage?categoryId=78">User & Deployment Guides</a>
+                                                                        </h6>
+
+                                                                    </div>
+                                                                    <div class="mega-menu-item">
+                                                                        <h6 class="mega-head"><a href="../Home/ViewPage?categoryId=79">Product Brouchure</a></h6>
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="is-normal-menu">
+                                                        <a href="../Home/ViewPage?categoryId=81">Hosting</a>
+
+                                                    </li>
+                                                    <li class="is-normal-menu">
+                                                        <a href="~/Home/Pricing">Pricing</a>
+                                                    </li>
+                                                    <li class="is-mega-menu">
+                                                        <a href="~/Home/Index">Login</a>
+                                                        <ul class="sub-menu">
+                                                            <li>
+                                                                <div>
+                                                                    <div class="mega-menu-item">
+                                                                        <h6 class="mega-head">
+                                                                            <a href="~/Home/Index">Cloud Dashboard</a>
+                                                                        </h6>
+
+                                                                    </div>
+                                                                    <div class="mega-menu-item">
+                                                                        <h6 class="mega-head">
+                                                                            <a href="~/Home/Index"> Self-hosted Portal</a>
+                                                                        </h6>
+
+                                                                    </div>
+                                                                    <div class="mega-menu-item">
+                                                                        <h6 class="mega-head">
+                                                                            <a href="~/Home/Index"> Partner Portal</a>
+                                                                        </h6>
+
+                                                                    </div>                                                                   
+
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </li>                                                  
+                                                    <li class="is-normal-menu">
+                                                        <a href="~/Home/Registration">Live Demo</a>
+                                                    </li>
+                                                </ul>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>                      
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </header>
+
+        </div>
+        @RenderBody()
+        <div id="footercontent">
+            <footer id="footer" class="footer">
+                <div class="footer-top">
+                    <div class="container">
+                        <div class="inner">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="addresslogo">
+
+                                        <div class="logo">
+                                            <a href="index.html">
+                                                <h3 class="bacgroundcolor">Cloudsat Pvt. Ltd.</h3>
+                                            </a>
+                                        </div>
+                                        <div class="row footeraddresss bacgroundcolor">
+                                            <div class="col-lg-1">
+                                                <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="col-lg-11">
+                                                <p class="footeraddress">
+                                                    <span class="sfooteraddress">Address:- Plot No- 511, Sarahah Tower, Subhash Nagar, Gurgoan 122001, Haryana, India</span>
+                                                </p>
+                                            </div>
+
+
+
+                                        </div>
+                                        <p class="footeraddress bacgroundcolor">
+
+                                            <i class="fa fa-phone" aria-hidden="true"></i> <a href="tel:+91 7428600609" class="bacgroundcolor">Contact No- 7428600609</a>
+
+                                            <br />
+                                            <i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:info@csaterp.com" class="bacgroundcolor">Mail Us- info@csaterp.com</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 ">
+                                    <div class="footer-item footer-menu">
+                                        <h6 class="bacgroundcolor">Company</h6>
+                                        <ul>
+                                            <li><a href="~/Home/Aboutus" title="About us" class="bacgroundcolor"><i class="fa fa-angle-right"></i>&nbsp&nbsp About us</a></li>
+                                            <li><a href="#" title="Blog" class="bacgroundcolor"><i class="fa fa-angle-right"></i>&nbsp&nbsp Blog</a></li>
+                                            <li><a href="~/Home/JOBOpening" title="Careers" class="bacgroundcolor"><i class="fa fa-angle-right"></i>&nbsp&nbsp Careers</a></li>
+                                            <li><a href="~/Home/ContactUs" title="Contact" class="bacgroundcolor"> <i class="fa fa-angle-right"></i>&nbsp&nbsp Contact</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 bacgroundcolor">
+                                    <div class="footer-item footer-menu">
+                                        <h6 class="bacgroundcolor">Resources</h6>
+                                        <ul>
+                                            <li><a href="~/Home/Downloads" title="Downloads" class="bacgroundcolor"><i class="fa fa-angle-right"></i>&nbsp&nbsp Downloads</a></li>
+                                            <li><a href="#" title="Help Center" class="bacgroundcolor"> <i class="fa fa-angle-right"></i>&nbsp&nbsp Help Center</a></li>
+
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 ">
+                                    <div class="footer-item footer-menu">
+                                        <h6 class="bacgroundcolor">Social Media</h6>
+                                        <ul>
+                                            <li><a href="#" title="Facebook" class="bacgroundcolor"><i class="fa fa-angle-right"></i>&nbsp&nbsp Facebook</a></li>
+                                            <li><a href="#" title="Twitter" class="bacgroundcolor"><i class="fa fa-angle-right"></i>&nbsp&nbsp Twitter</a></li>
+                                            <li><a href="#" title="Instagram" class="bacgroundcolor"><i class="fa fa-angle-right"></i>&nbsp&nbsp Instagram</a></li>
+                                            <li><a href="#" title="Linkedin" class="bacgroundcolor"><i class="fa fa-angle-right"></i>&nbsp&nbspLinkedin</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 ">
+                                    <div class="footer-item footer-newsletter">
+                                        <h6 class="bacgroundcolor">Newsletter</h6>
+                                        <p class="bacgroundcolor">Subcribe our newsletter and stay up to date about the company</p>
+                                        <form action="#" class="newsletter">
+                                            <div class="field-input">
+                                                <input type="email" value="" placeholder="Email address">
+                                            </div>
+                                            <div class="field-submit">
+                                                <button>Subcribe</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom bacgroundcolor">
+                    <div class="center">
+                        <div class="inner flex flex-content-sb flex-align-c">
+                            <div class="style ">Copyright © @System.DateTime.Today.Year.  <strong><a href="" target="_blank" class="companyurl">Cloudsat Pvt. Ltd.</a></strong></div>
+                            <div class="style2">
+                                <ul>
+                                    <li><a title=""></a> </li>
+                                    <li><a title="Terms Privacy Policy" href="~/Home/Termsandconditions" class="companyurl">Terms </a>| <a title="Terms Privacy Policy" href="~/Home/PrivacyPolicy" class="companyurl">Privacy Policy </a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+           @* <a href="#
+            " id="backtotop" class="backtotop">
+                <svg width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.52344 18.5234C5.3151 18.3151 5.3151 18.0938 5.52344 17.8594L13.7266 9.69531C13.9349 9.46094 14.1432 9.46094 14.3516 9.69531L22.5547 17.8594C22.763 18.0938 22.763 18.3151 22.5547 18.5234L21.7734 19.3047C21.5651 19.5391 21.3438 19.5391 21.1094 19.3047L14.0391 12.2344L6.96875 19.3047C6.73438 19.5391 6.51302 19.5391 6.30469 19.3047L5.52344 18.5234Z" fill="#ffffff"></path>
+                </svg>
+            </a>*@
+            <div id="popup-wrap" class="popup-wrap popup-video">
+                <div class="overlay"></div>
+                <span class="close">
+                    <svg width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.3672 14.5L20.2109 19.3438C20.3411 19.474 20.3411 19.6172 20.2109 19.7734L19.3125 20.6719C19.1562 20.8021 19.013 20.8021 18.8828 20.6719L18.0625 19.8125L14.0391 15.8281L9.19531 20.6719C9.0651 20.8021 8.92188 20.8021 8.76562 20.6719L7.86719 19.7734C7.73698 19.6172 7.73698 19.474 7.86719 19.3438L12.7109 14.5L7.86719 9.65625C7.73698 9.52604 7.73698 9.38281 7.86719 9.22656L8.76562 8.32812C8.92188 8.19792 9.0651 8.19792 9.19531 8.32812L14.0391 13.1719L18.8828 8.32812C19.013 8.19792 19.1562 8.19792 19.3125 8.32812L20.2109 9.22656C20.3411 9.38281 20.3411 9.52604 20.2109 9.65625L19.3516 10.4766L15.3672 14.5Z" fill="#ffffff"></path>
+                    </svg>
+                </span>
+                <div class="inner">
+                    <iframe src="https://www.youtube.com/embed/vfhzo499OeA?controls=0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <!-- jQuery -->
+    <script src="~/assets/js/jquery-1.12.4.js"></script>
+    <script src="~/assets/libs/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/assets/libs/swiper/swiper-bundle.min.js"></script>
+    <script src="~/assets/libs/waypoints/jquery.waypoints.min.js"></script>
+    <script src="~/assets/libs/counter/jquery.counterup.min.js"></script>
+    <script src="~/assets/libs/wowjs/wow.min.js"></script>
+    <script src="~/assets/js/main.js"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+    @RenderSection("Scripts", required: false)
+
+
+    <script>
+
+        getMenudropdownlist()
+        function getMenudropdownlist() {
+            $.ajax(
+                {
+                    url: "@apiUrl/api/Category/GetAllChildCategoryList",
+                    type: "GET",
+                    success: function (data) {
+                        // console.log(data);
+
+                        var x = '';
+
+                        for (var i = 0; i < data.length; i++) {
+                            var menuType = 1;
+
+                            if (data[i].children == null) {
+                                menuType = 1;
+                                //primary
+                            }
+                            else if (data[i].children.length > 0) {
+                                //check d s t
+                                for (var r = 0; r < data[i].children.length; r++) {
+
+                                    if (data[i].children[r].children != null) {
+
+                                        menuType = 3;
+
+                                    }
+                                    else if (menuType != 3) {
+                                        menuType = 2;
+
+
+                                    }
+                                }
+                            }
+
+                            if (menuType == 3) {
+
+                                x = x + ' <li class="is-mega-menu"> <a class="topcategory" href="../Home/ViewPage?categoryId=' + data[i]['categoryId'] + '">' + data[i]['categoryName'] + '</a>'
+
+                                x = x + '<ul class="sub-menu submegamenu"> <li><div class="mega-menu"><div class="row">'
+
+                                if (data[i]['children'] != null && data[i]['children'] != true) {
+
+                                    for (var j = 0; j < data[i]['children'].length; j++) {
+                                        if (data[i]['children'].length >= 4) {
+                                            x = x + '<div class="col-md-3"><div class="mega-menu-item"> <h6 class="mega-head"> <a >' + data[i]['children'][j]['categoryName'] + '</a></h6> <ul class="sub-menu">'
+
+                                            if (data[i]['children'][j]['children'] != null) {
+
+                                                for (var k = 0; k < data[i]['children'][j]['children'].length; k++) {
+
+                                                    x = x + '<li class="childchildmenu"><a class="childchildmenuss" href="../Home/ViewPage?categoryId=' + data[i]['children'][j]['children'][k]['categoryId'] + '">' + data[i]['children'][j]['children'][k]['categoryName'] + '</a></li>'
+
+                                                }
+                                            }
+
+                                        }
+                                        else if (data[i]['children'].length == 3) {
+                                            x = x + '<div class="col-md-4"><div class="mega-menu-item"> <h6 class="mega-head"> <a >' + data[i]['children'][j]['categoryName'] + '</a></h6> <ul class="sub-menu">'
+
+                                            if (data[i]['children'][j]['children'] != null) {
+
+                                                for (var k = 0; k < data[i]['children'][j]['children'].length; k++) {
+
+                                                    x = x + '<li class="childchildmenu"><a class="childchildmenuss" href="../Home/ViewPage?categoryId=' + data[i]['children'][j]['children'][k]['categoryId'] + '">' + data[i]['children'][j]['children'][k]['categoryName'] + '</a></li>'
+
+                                                }
+                                            }
+                                        }
+                                        else if (data[i]['children'].length == 2) {
+                                            x = x + '<div class="col-md-6"><div class="mega-menu-item"> <h6 class="mega-head"> <a >' + data[i]['children'][j]['categoryName'] + '</a></h6> <ul class="sub-menu">'
+
+                                            if (data[i]['children'][j]['children'] != null) {
+
+                                                for (var k = 0; k < data[i]['children'][j]['children'].length; k++) {
+
+                                                    x = x + '<li class="childchildmenu"><a class="childchildmenuss" href="../Home/ViewPage?categoryId=' + data[i]['children'][j]['children'][k]['categoryId'] + '">' + data[i]['children'][j]['children'][k]['categoryName'] + '</a></li>'
+
+                                                }
+                                            }
+                                        }
+
+
+
+                                        x = x + '</ul></div></div>'
+
+                                    }
+                                }
+
+
+                                x = x + ' </div></div></li> </ul>'
+                                x = x + '</li>'
+                            }
+                            if (menuType == 2) {
+
+                                if (data[i].children != null) {
+                                    if (data[i].children.length > 0) {
+                                        x = x + '<li class="is-normal-menu" ><a class="topcategory" href="../Home/ViewPage?categoryId=' + data[i]['categoryId'] + '" > ' + data[i]['categoryName'] + '</a><ul class="sub-menu normal-menu">'
+                                        for (var m = 0; m < data[i].children.length; m++) {
+
+                                            x = x + ' <li class="childchildmenu"><a class="childchildmenuss" href="../Home/ViewPage?categoryId=' + data[i]['children'][m]['categoryId'] + '" >' + data[i].children[m].categoryName + ' </a></li>'
+
+
+                                        }
+
+
+                                        x = x + ' </ul></li>';
+                                    }
+                                }
+                            }
+                            if (menuType == 1) {
+                                x = x + '<li class="is-normal-menu " ><a class="topcategory" href="../Home/ViewPage?categoryId=' + data[i]['categoryId'] + '" > ' + data[i]['categoryName'] + '</a>'
+
+
+
+                                x = x + '</li>';
+                            }
+
+
+
+                        }
+                        x = x + '<li class="is-normal-menu" ><a class="topcategory" href="../Home/Pricing" >Pricing</a></li>'
+                        $('#GetmainMenu').html(x);
+
+
+                    },
+                    error: function (err) {
+                        console.log(err);
+
+                    }
+                }
+            );
+
+        }
+    </script>
+
+
+
+</body>
+</html>

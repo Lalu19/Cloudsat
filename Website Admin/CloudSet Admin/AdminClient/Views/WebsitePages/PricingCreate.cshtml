@@ -1,0 +1,278 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "Pricing Create";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+}
+
+<style>
+    .btn-primary {
+        color: #fff;
+        background: #3b16cc !important;
+        border-color: #3b16cc 74 !important;
+    }
+
+    #back-to-top {
+        background: #2d25c5;
+    }
+
+        #back-to-top:hover {
+            color: #3b16cc !important;
+            border: 2px solid #3b16cc;
+        }
+
+    .slide-menu a.active {
+        color: #3b16cc !important;
+    }
+
+    .sweet-alert button {
+        background-color: #0052cc !important;
+    }
+
+    a {
+        color: #3b16cc;
+    }
+</style>
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="fe fe-pie-chart mr-1"></i> Admin Console</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Category</li>
+    </ol>
+    <div class="ml-auto">
+        <a href="~/WebsitePages/PricingList" class="btn btn-primary btn-icon btn-sm text-white mr-2">
+            <span>
+                <i class="fe fe-plus"></i>
+            </span> View
+        </a>
+
+    </div>
+</div>
+
+<div class="col-md-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="col-md-11">
+                <div class="card-title">Pricing Create</div>
+            </div>
+        </div>
+        <div class="card-body" id="section">
+            <div>
+                <form action="#" role="form" class="validate" id="formPost">
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="hint-name">Plans</label>
+                                        <select class="form-control" id="plans" type="text">
+                                            <option value="" selected>--Choose--</option>
+                                            <option value="Basic">Basic</option>
+                                            <option value="premium">Premium</option>
+                                            <option value="pro">Pro</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="hint-name">Period</label>
+                                        <select class="form-control" id="period" type="text">
+                                            <option value="" selected>--Choose--</option>
+                                            <option value="Monthly">Monthly</option>
+                                            <option value="QUARTERLY">QUARTERLY</option>
+                                            <option value="HALF_YEARLY">HALF-YEARLY</option>
+                                            <option value="ANNUALLY">ANNUALLY</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Product</label>
+                                        <select class="form-control" id="productname" type="text">
+                                            <option value="" selected>--Choose--</option>
+                                            <option value="ERP">ERP</option>
+                                            <option value="Desktop Monitoring">Desktop Monitoring</option>
+                                            <option value="Mail Camening">Mail Camening</option>
+                                            <option value="Virtual Office">Virtual Office</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Price</label>
+                                        <input type="number" class="form-control" autocomplete="off" id="price"  placeholder="Price" required />
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-1">
+                                    <div class="btn-box addbutton">
+                                        <button type="button" class="btn btn-primary btn-sm" id="btnprice">Add </button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="card addtable">
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table id="producttabl" class="table table-striped table-bordered nowrap dataTable no-footer dtr-inline">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Product</th>
+                                                            <th>Price</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="product-tb">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <button type="button" id="SaveBtn" class="btn btn-primary">Save</button>
+
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+
+    <script>
+
+        $(function () {
+            $("#btnprice").click(function (e) {
+                var x = $('#product-tb').html();
+                var Product = $('#productname option:selected').text();
+
+                var price = $('#price ').val();
+
+                x = x + "<tr><td>" + Product + "</td><td>" + price + "</td><td><button type='button' class='btn btn-outline-danger' id='delRowBtn'>Delete</button></td></tr>"
+                $('#product-tb').html(x);
+                $(document.body).delegate("#delRowBtn", "click", function () {
+                    $(this).closest("tr").remove();
+                });
+            });
+        });
+
+
+   
+
+        $("#SaveBtn").click(function (e) {
+            if (!document.getElementById("formPost").checkValidity()) {
+                e.preventDefault();
+            } else {
+
+                var itemDeatils = [];
+                $.each($("#producttabl tbody tr"), function () {
+                    var $irow = $(this),
+                        rowObj = {};
+                    var k = 0
+                    var productname;
+                    var Price;
+
+                    $.each($("td", $irow), function () {
+                        var $col = $(this);
+
+                        if (k == 0) {
+                            productname = $col.html()
+                        }
+                        if (k == 1) {
+                            Price = $col.html()
+                        }
+                        k = k + 1
+                    });
+
+                    var a = {
+                        "productname": productname,
+                        "price": Price,
+                    }
+
+                    itemDeatils.push(a)
+                });
+
+                var model = {
+
+                    planes: $.trim($("#plans").val()),
+                    period: $.trim($("#period").val()),
+
+                    pricingproductDTOs: itemDeatils,
+
+                    createdBy: @Context.Session.GetInt32("UserId"),
+
+                }
+               
+                $.ajax({
+                    type: "POST",
+                    url: "@apiUrl/api/Pricing/PricingCreate",
+                    data: JSON.stringify(model),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data, statusText, xhr) {
+                        if (xhr.status === 200) {
+                            
+                            sweetAlert({
+                                html: true,
+                                title: "Plans",
+                                text: "Successfully created!",
+                                type: "success"
+                            }, function () {
+                                location.reload();
+                            });
+                        } else if (data.status === "duplicate") {
+                            sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                        } else if (data.status === "error") {
+                            sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                        } else {
+                            sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                        }
+                    },
+                    error: function (data) {
+                        if (data.status == 401) {
+                            window.location.replace('/Message/TokenExpire');
+                        } else if (data.status == 403) {
+                            window.location.replace('/Message/Unauthorize');
+                        } else if (data.status == 400) {
+                            sweetAlert("Validation Alert!", "Please check input data!", "warning");
+                        }
+                    }
+
+                });
+
+
+            }
+
+        });
+
+
+
+
+
+    </script>
+
+
+}

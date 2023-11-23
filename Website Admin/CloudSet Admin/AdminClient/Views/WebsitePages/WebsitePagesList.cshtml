@@ -1,0 +1,249 @@
+﻿
+
+@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "Websitepage List";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+}
+
+<style>
+    .btn-primary {
+        color: #fff;
+        background: #3b16cc !important;
+        border-color: #3b16cc !important;
+    }
+
+    a {
+        color: #3b16cc;
+    }
+
+    a {
+        color: #3b16cc;
+    }
+
+    .sweet-alert button {
+        background-color: #0052cc !important;
+    }
+
+    .btn-secondary {
+        color: #fff;
+        background: #0052cc !important;
+        border-color: #0052cc;
+    }
+
+    .table th, .text-wrap table th {
+        color: #2e3138;
+        text-transform: inherit;
+        font-size: 0.875rem;
+        font-weight: 400;
+    }
+</style>
+<!-- PAGE-HEADER -->
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="fe fe-file-text mr-1"></i>Admin Consol</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Websitepage List</li>
+    </ol>
+    <div class="ml-auto">
+        <a href="~/WebsitePages/WebsitePagesCreate" class="btn btn-primary btn-icon btn-sm text-white mr-2">
+            <span>
+                <i class="fe fe-plus"></i>
+            </span> Websitepage Create
+        </a>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Websitepage List</div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive" id="tableView">
+                    <table id="page_Tb" class="table table-striped table-bordered nowrap dataTable no-footer dtr-inline" style="width:100%">
+                        <thead>
+                            <tr>
+                               
+                                <th>Header</th>
+                                <th>Description</th>
+                                <th>Description1</th>
+                                <th>Description2</th>
+                                <th>Description3</th>
+                                <th>Description4</th>
+                                <th>Description5</th>
+                               
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div id="treeview" style="display:none">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
+
+
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <script>
+        var categoryId;
+
+        function showTable() {
+            $('#tableView').show();
+            $('#treeview').hide();
+        }
+        function showTree() {
+            $('#tableView').hide();
+            $('#treeview').show();
+        }
+
+
+        $(function () {
+            loadCategory();
+            $('#treeview').jstree({
+                'core': {
+                    'data': {
+                        'url': '/Category/Nodes',
+                        'data': function (node) {
+                            return { 'id': node.id };
+                        }
+                    }
+                }
+            });
+
+
+            $('#treeview').on('changed.jstree', function (e, data) {
+                var i, j, r = [];
+                for (i = 0, j = data.selected.length; i < j; i++) {
+                    r.push(data.instance.get_node(data.selected[i]));
+
+                }
+
+
+
+                // $('#event_result').html('Selected: ' + r.join(', '));
+            }).jstree();
+
+
+
+            function loadCategory() {
+                var table = $('#page_Tb').DataTable();
+                table.destroy();
+                table = $('#page_Tb').dataTable({
+                    "paginationType": "full_numbers",
+                    "dom": 'Bfrtip',
+                    "buttons": [/*'copy',*/ 'csv', 'excel', 'pdf', 'print'],
+                    "searching": true,
+                    "paging": true,
+                    "sort": true,
+                    "info": true,
+                    "ajax": {
+                        "url": "@apiUrl/api/Websitepages/GetWebsitepagesList",
+                        "type": "GET",
+                        "dataType": "json",
+
+                        "error": function (data) {
+                            if (data.status == 401) {
+                                window.location.replace('/Message/TokenExpire');
+                            } else if (data.status == 403) {
+                                window.location.replace('/Message/Unauthorize');
+                            }
+                        }
+                    },
+                    "order": [],
+                    "columns": [
+                        
+                        { "data": "header", "orderable": true },
+                        { "data": "description", "orderable": true,  },
+                      
+                        { "data": "description1", "orderable": true },
+                        { "data": "description2", "orderable": true,  },
+                        { "data": "description3", "orderable": true,  },
+                        { "data": "description4", "orderable": true, },
+                        { "data": "description5", "orderable": true,  },
+
+                        //{
+                        //    "render": function (data, type, row) {
+                        //        if (row.imageUpload === '')
+                        //            return '';
+                        //        else
+                        //            return '<img src="' + row.imageUpload + '"/>'
+                        //    }
+                        //},
+
+                        {
+                            "render": function (data, type, row) {
+
+                                return '<a href="../WebsitePages/WebsitePagesEdit?websitePagesId=' + row.websitePagesId + '">edit</a> &nbsp;      <button class="btn btn-secondary btn-sm rounded-circle" title="Delete" data-target="#delete" data-title="Delete" data-toggle="modal" data-id=' + row.websitePagesId + '><i class="material-icons">delete</i></button>'
+
+                            }
+                        },
+
+                    ]
+                });
+            }
+
+            $('#page_Tb tbody').on('click', 'button[data-target="#delete"]', function () {
+                var id = $(this).data('id');
+
+
+                swal({
+                    html: true,
+                    title: "Are you sure?",
+                    text: "You will not be able to recover this data!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3b16cc",
+                    confirmButtonText: "Yes, confirm it!",
+                    closeOnConfirm: false
+                }, function () {
+                    $.ajax({
+                        type: "GET",
+                        url: "@apiUrl/api/Websitepages/DeleteWebsitepages/" + id + "/" + @Context.Session.GetInt32("UserId"),
+
+                        contentType: "application/json; charset=utf-8",
+                        headers: {
+                            "authorization": "Bearer @Context.Session.GetString("TokenTxt")"
+                        },
+                        dataType: "json",
+                        success: function (data, statusText, xhr) {
+                            if (xhr.status == 200) {
+                                $('#page_Tb').DataTable().ajax.reload(null, false);
+                                sweetAlert({
+                                    html: true,
+                                    title: "Webpage",
+                                    text: "Successfully deleted!",
+                                    type: "success"
+                                });
+                            } else if (xhr.status == 202) {
+                                sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                            } else {
+                                sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                            }
+                        },
+                        error: function (data) {
+                            if (data.status == 401) {
+                                window.location.replace('/Message/TokenExpire');
+                            } else if (data.status == 403) {
+                                window.location.replace('/Message/Unauthorize');
+                            }
+                        }
+                    });
+                });
+            });
+
+        });
+
+
+      
+    </script>
+}

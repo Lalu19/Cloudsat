@@ -1,0 +1,329 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "webpage Edit";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+}
+
+
+<style>
+    .btn-success {
+        color: #fff;
+        background: #3b16cc !important;
+        border-color: #3b16cc;
+    }
+
+    a {
+        color: #3b16cc;
+    }
+</style>
+<!-- PAGE-HEADER -->
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="fe fe-file-text mr-1"></i>Admin Consol</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Webpage Edit</li>
+    </ol>
+    <div class="ml-auto">
+        <a href="~/WebsitePages/WebsitePagesList" class="btn btn-primary btn-icon btn-sm text-white mr-2">
+            <span>
+                <i class="fe fe-plus"></i>
+            </span>Webpage Edit View
+        </a>
+    </div>
+</div>
+<!-- PAGE-HEADER END -->
+
+<div class="row">
+    <div class="col-md">
+        <div class="card overflow-hidden">
+            <div class="card-header">
+                <h3 class="card-title">Webpage Edit</h3>
+            </div>
+
+
+            <div class="card-body">
+                <form action="#" role="form" class="validate" id="formPost">
+                    <div class="row">
+                        <div id="treeview">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Header &nbsp;<span style="color: red;"><b>*</b></span>
+                                </label>
+                                <input type="text" class="form-control" id="header"
+                                       onkeypress="movetoNext(event, 'headertype')" placeholder="Header" required>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Description &nbsp;<span style="color: red;"><b>*</b></span>
+                                </label>
+                                <input type="text" class="form-control" id="description"
+                                       onkeypress="movetoNext(event, 'Descriptiontype')" placeholder="description"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Description1 &nbsp;<span style="color: red;"><b>*</b></span>
+                                </label>
+                                <input type="text" class="form-control" id="description1"
+                                       onkeypress="movetoNext(event, 'Descriptiontype')" placeholder="Description1"
+                                       required>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Description2 &nbsp;<span style="color: red;"><b>*</b></span>
+                                </label>
+                                <input type="text" class="form-control" id="description2"
+                                       onkeypress="movetoNext(event, 'Description2')" placeholder="Description2"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Description3 &nbsp;<span style="color: red;"><b>*</b></span>
+                                </label>
+                                <input type="text" class="form-control" id="description3"
+                                       onkeypress="movetoNext(event, 'Description3')" placeholder="Description3"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Description4 &nbsp;<span style="color: red;"><b>*</b></span>
+                                </label>
+                                <input type="text" class="form-control" id="description4"
+                                       onkeypress="movetoNext(event, 'Description4')" placeholder="Description4"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Description5 &nbsp;<span style="color: red;"><b>*</b></span>
+                                </label>
+                                <input type="text" class="form-control" id="description5"
+                                       onkeypress="movetoNext(event, 'Description5')" placeholder="Description5"
+                                       required>
+                            </div>
+                        </div>
+                        @*<div class="col-md-2">
+                            <div class="form-group">
+                                
+                                <label class="form-label">
+                                    Image &nbsp;<span style="color: red;"><b>*</b></span>
+                                </label>
+                                <input type="file" class="form-control" autocomplete="off"
+                                       id="image" name="Banner" placeholder="Banner" />
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+
+                                <img id="getimg" width="90" src="" />
+                            </div>
+                        </div>*@
+
+
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <button type="button" id="btnupdate" class="btn btn-radius btn-success">Update</button>
+                            <a type="button" href="~/WebsitePages/WebsitePagesList" class="btn btn-radius btn-danger">Reset</a>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+    </div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <script>
+
+
+        var categoryId;
+
+        loadCategory()
+        function loadCategory() {
+            $('#treeview').jstree({
+                'core': {
+                    'data': {
+                        'url': '/Category/Nodes',
+                        'data': function (node) {
+                            return { 'id': node.id };
+                        }
+                    }
+                }
+            }).on('ready.jstree', function () {
+
+                var t = $('#treeview').jstree(true);
+                var n = t.get_node(categoryId);
+
+                t.select_node(n);
+                n = t.get_selected(true);
+                console.log(n[0].id, n[0]);
+            });
+
+
+            $('#treeview').on('changed.jstree', function (e, data) {
+                var i, j, r = [];
+                for (i = 0, j = data.selected.length; i < j; i++) {
+                    r.push(data.instance.get_node(data.selected[i]));
+                }
+                categoryId = r[0].id;
+            }).jstree();
+        }
+
+
+        var websitePagesId = @ViewBag.websitePagesId
+            loadSinglewebsite()
+        function loadSinglewebsite() {
+            $.ajax({
+                type: "GET",
+                url: "@apiUrl/api/Websitepages/GetSingleWebsitepages/" + websitePagesId,
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                    "authorization": "Bearer @Context.Session.GetString("TokenTxt")"
+                },
+                dataType: "json",
+                success: function (data) {
+                    //console.log(data);
+                    if (data) {
+                        $('#header').val(data.header);
+                        $('#description').val(data.description);
+                        $('#description1').val(data.description1);
+                        $('#description2').val(data.description2);
+                        $('#description3').val(data.description3);
+                        $('#description4').val(data.description4)
+                        $('#description5').val(data.description5)
+                        //$('#getimg').attr('src', data.imageUpload);
+
+                        // loadParent();
+                    }
+                    else {
+                        sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                    }
+                },
+                error: function (data) {
+                    if (data.status == 401) {
+                        window.location.replace('/Message/TokenExpire');
+                    } else if (data.status == 403) {
+                        window.location.replace('/Message/Unauthorize');
+                    }
+                }
+            });
+        }
+
+        $("#btnupdate").click(function (e) {
+            if (!document.getElementById("formPost").checkValidity()) {
+                e.preventDefault();
+            } else {
+                //imgPath = '';
+                //var currentImageSrc = '';
+                //currentImageSrc = $('#getimg').attr('src');
+
+                //if ($('#image').val() != '' && $('#image').val() != 'Choose file') {
+                //    uploadFile();
+                //} else if (currentImageSrc != '') {
+                //    imgPath = currentImageSrc;
+                //}
+
+                var model = {
+                    websitePagesId: websitePagesId,
+                    header: $.trim($("#header").val()),
+                    description: $.trim($("#description").val()),
+                    description1: $.trim($("#description1").val()),
+                    description2: $.trim($("#description2").val()),
+                    description3: $.trim($("#description3").val()),
+                    description4: $.trim($("#description4").val()),
+                    description5: $.trim($("#description5").val()),
+                    //imageUpload: imgPath,
+                    updatedBy: @Context.Session.GetInt32("UserId"),
+                }
+               
+                $.ajax({
+                    type: "POST",
+                    url: "@apiUrl/api/Websitepages/UpdateWebsitepages",
+                    data: JSON.stringify(model),
+                    contentType: "application/json; charset=utf-8",
+                    headers: {
+                        "authorization": "Bearer @Context.Session.GetString("TokenTxt")"
+                    },
+
+                    success: function (data, statusText, xhr) {
+                        
+                        if (xhr.status === 200) {
+                            $('#page_Tb').DataTable().ajax.reload(null, false);
+                            sweetAlert({
+                                html: true,
+                                icon: "success",
+                                title: "WebsitePage",
+                                text: "Successfully updated!",
+                                type: "success"
+                            });
+                        } else if (data.status === "duplicate") {
+                            sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                        } else if (data.status === "error") {
+                            sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                        } else {
+                            sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                        }
+                    },
+                    error: function (data) {
+                        
+                        if (data.status == 401) {
+                            window.location.replace('/Message/TokenExpire');
+                        } else if (data.status == 403) {
+                            window.location.replace('/Message/Unauthorize');
+                        } else if (data.status == 400) {
+                            sweetAlert("Validation Alert!", "Please check input data!", "warning");
+                        }
+                    }
+                });
+            }
+        });
+
+        function uploadFile() {
+            var totalFiles = document.getElementById('image').files.length;
+            if (totalFiles > 0) {
+                var formData = new FormData();
+                var files = document.getElementById('image').files;
+                formData.append("file", files[0]);
+                $.ajax(
+                    {
+                        url: "/Upload/ImgUpload",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        async: false,
+                        type: "POST",
+                        success: function (data) {
+                            imgPath = data;
+                            $('#getimg').attr('src', imgPath);
+                            resetInputFile('#formPost');
+                        }
+                    }
+                );
+            }
+
+        }
+    </script>
+}

@@ -1,0 +1,315 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "ApplicationMaster Edit";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+}
+
+
+
+<style>
+    a {
+        color: #3b16cc;
+    }
+</style>
+
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="fe fe-pie-chart mr-1"></i> Admin Console</a></li>
+        <li class="breadcrumb-item active" aria-current="page">ApplicationMaster</li>
+    </ol>
+    <div class="ml-auto">
+        <a href="~/ApplicationMaster/ApplicationMasterList" class="btn btn-primary btn-icon btn-sm text-white mr-2">
+            <span>
+                <i class="fe fe-plus"></i>
+            </span> View
+        </a>
+
+    </div>
+</div>
+
+<div class="col-md-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="col-md-11">
+                <div class="card-title">ApplicationMaster Edit</div>
+            </div>
+
+        </div>
+        <div class="card-body" id="section">
+            <div>
+                <form action="#" role="form" class="validate" id="formPost">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div id="treeview">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Name</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="ApplicationMastername" placeholder="Name" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Monthly Price</label>
+                                        <input type="number" class="form-control" autocomplete="off" id="ApplicationMasterMonthlyPrice" placeholder="Monthly Price" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Halfyearly Price</label>
+                                        <input type="number" class="form-control" autocomplete="off" id="ApplicationMasterHalfyearlyPrice" placeholder="Halfyearly Price" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Quarterly Price</label>
+                                        <input type="number" class="form-control" autocomplete="off" id="ApplicationMasterQuarterlyPrice" placeholder="Quarterly Price" required />
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Yearly Price</label>
+                                        <input type="number" class="form-control" autocomplete="off" id="ApplicationMasterYearlyPrice" placeholder="Yearly Price" required />
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Package Name</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="packagename" placeholder="Package Name" required />
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Logo Upload</label>
+                                        <input type="file" class="form-control" id="image" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="text-center">
+                                        <img id="getimg" src="" width="90" class="rounded-circle" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="hint-name">Front Page Display</label>
+                                        <select class="form-control" id="Frontpage" type="text">
+                                            <option value="" selected>--Choose--</option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <button type="button" id="SaveBtn" class="btn btn-primary">Save</button>
+
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <script>
+
+        var applicationMasterId = @ViewBag.applicationMasterId
+                             var parentId;
+        $(function () {
+            loadSingleapplicationMasterId()
+            $('#treeview').jstree({
+                'core': {
+                    'data': {
+                        'url': '/ApplicationMaster/WithPrimaryNodes',
+                        'data': function (node) {
+                            return { 'id': node.id };
+                        }
+                    }
+                }
+            }).on('ready.jstree', function () {
+                $('#treeview').jstree("open_all");
+                var t = $('#treeview').jstree(true);
+                var n = t.get_node(parentId);
+
+                t.select_node(n);
+                n = t.get_selected(true);
+                console.log(n[0].id, n[0]);
+            })
+            $('#treeview').on('changed.jstree', function (e, data) {
+                var i, j, r = [];
+                for (i = 0, j = data.selected.length; i < j; i++) {
+                    r.push(data.instance.get_node(data.selected[i]));
+                }
+                parentId = r[0].id;
+
+            }).jstree();
+
+            
+         function loadSingleapplicationMasterId() {
+            $.ajax({
+                type: "GET",
+                url: "@apiUrl/api/ApplicationMaster/GetSingleApplicationMaster/" + applicationMasterId,
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                    "authorization": "Bearer @Context.Session.GetString("TokenTxt")"
+                },
+                dataType: "json",
+                success: function (data) {
+                   
+                    if (data) {
+                            $('#ApplicationMastername').val(data.applicationMasterName);
+                        $('#ApplicationMasterMonthlyPrice').val(data.applicationMasterMonthlyPrice);
+                        $('#ApplicationMasterHalfyearlyPrice').val(data.applicationMasterHalfyearlyPrice);
+                        $('#ApplicationMasterQuarterlyPrice').val(data.applicationMasterQuarterlyPrice);
+                        $('#ApplicationMasterYearlyPrice').val(data.applicationMasterYearlyPrice);
+                        $('#packagename').val(data.packagename);
+                        
+                        $('#Frontpage').val(data.frontpagedisplay);
+                        $('#getimg').attr('src', data.applicationMasterLogo);
+
+                            if (data.parent != null)
+                                parentId = data.parent
+                            else
+                                parentId = "0"
+
+                        // loadParent();
+                    }
+                    else {
+                        sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                    }
+                },
+                error: function (data) {
+                    if (data.status == 401) {
+                        window.location.replace('/Message/TokenExpire');
+                    } else if (data.status == 403) {
+                        window.location.replace('/Message/Unauthorize');
+                    }
+                }
+            });
+        }
+
+            $("#SaveBtn").click(function (e) {
+            if (!document.getElementById("formPost").checkValidity()) {
+                e.preventDefault();
+            } else {
+                imgPath = '';
+                var currentImageSrc = '';
+                currentImageSrc = $('#getimg').attr('src');
+
+                if ($('#image').val() != '' && $('#image').val() != 'Choose file') {
+                    uploadFile();
+                } else if (currentImageSrc != '') {
+                    imgPath = currentImageSrc;
+                }
+                    if (parentId == 0) {
+                        parentId = null;
+                    }
+                var model = {
+                    applicationMasterId: applicationMasterId,
+                        applicationMasterName: $.trim($("#ApplicationMastername").val()),
+                    applicationMasterMonthlyPrice: $.trim($("#ApplicationMasterMonthlyPrice").val()),
+                    applicationMasterQuarterlyPrice: $.trim($("#ApplicationMasterQuarterlyPrice").val()),
+                    applicationMasterHalfyearlyPrice: $.trim($("#ApplicationMasterHalfyearlyPrice").val()),
+                    applicationMasterYearlyPrice: $.trim($("#ApplicationMasterYearlyPrice").val()),
+                    packagename: $.trim($("#packagename").val()),
+                        parent: parseInt(parentId),
+                    frontpagedisplay: $.trim($("#Frontpage").val()),
+                    applicationMasterLogo: imgPath,
+                    updatedBy: @Context.Session.GetInt32("UserId"),
+                }
+                
+                $.ajax({
+                    type: "POST",
+                    url: "@apiUrl/api/ApplicationMaster/updateApplicationMaster",
+                    data: JSON.stringify(model),
+                    contentType: "application/json; charset=utf-8",
+                    headers: {
+                        "authorization": "Bearer @Context.Session.GetString("TokenTxt")"
+                    },
+
+                    success: function (data, statusText, xhr) {
+                        
+                        if (xhr.status === 200) {
+                            $('#page_Tb').DataTable().ajax.reload(null, false);
+                            sweetAlert({
+                                html: true,
+                                icon: "success",
+                                title: "Applicaton Master",
+                                text: "Successfully updated!",
+                                type: "success"
+                            });
+                        } else if (data.status === "duplicate") {
+                            sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                        } else if (data.status === "error") {
+                            sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                        } else {
+                            sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                        }
+                    },
+                    error: function (data) {
+                        
+                        if (data.status == 401) {
+                            window.location.replace('/Message/TokenExpire');
+                        } else if (data.status == 403) {
+                            window.location.replace('/Message/Unauthorize');
+                        } else if (data.status == 400) {
+                            sweetAlert("Validation Alert!", "Please check input data!", "warning");
+                        }
+                    }
+                });
+            }
+        });
+        });
+        function uploadFile() {
+            var totalFiles = document.getElementById('image').files.length;
+            if (totalFiles > 0) {
+                var formData = new FormData();
+                var files = document.getElementById('image').files;
+                formData.append("file", files[0]);
+                $.ajax(
+                    {
+                        url: "/Upload/ImgUpload",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        async: false,
+                        type: "POST",
+                        success: function (data) {
+                            imgPath = data;
+                            $('#getimg').attr('src', imgPath);
+                            resetInputFile('#formPost');
+                        }
+                    }
+                );
+            }
+
+        }
+    </script>
+}

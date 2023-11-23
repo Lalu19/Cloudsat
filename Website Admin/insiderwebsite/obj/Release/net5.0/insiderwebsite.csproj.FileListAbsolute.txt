@@ -1,0 +1,360 @@
+F:\APPMAN\Project\insiderwebsite\bin\Release\net5.0\appsettings.Development.json
+F:\APPMAN\Project\insiderwebsite\bin\Release\net5.0\appsettings.json
+F:\APPMAN\Project\insiderwebsite\bin\Release\net5.0\insiderwebsite.exe
+F:\APPMAN\Project\insiderwebsite\bin\Release\net5.0\insiderwebsite.deps.json
+F:\APPMAN\Project\insiderwebsite\bin\Release\net5.0\insiderwebsite.runtimeconfig.json
+F:\APPMAN\Project\insiderwebsite\bin\Release\net5.0\insiderwebsite.runtimeconfig.dev.json
+F:\APPMAN\Project\insiderwebsite\bin\Release\net5.0\insiderwebsite.dll
+F:\APPMAN\Project\insiderwebsite\bin\Release\net5.0\ref\insiderwebsite.dll
+F:\APPMAN\Project\insiderwebsite\bin\Release\net5.0\insiderwebsite.pdb
+F:\APPMAN\Project\insiderwebsite\bin\Release\net5.0\insiderwebsite.Views.dll
+F:\APPMAN\Project\insiderwebsite\bin\Release\net5.0\insiderwebsite.Views.pdb
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\insiderwebsite.GeneratedMSBuildEditorConfig.editorconfig
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\insiderwebsite.AssemblyInfoInputs.cache
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\insiderwebsite.AssemblyInfo.cs
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\insiderwebsite.csproj.CoreCompileInputs.cache
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\insiderwebsite.MvcApplicationPartsAssemblyInfo.cache
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorAssemblyInfo.cache
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorAssemblyInfo.cs
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\staticwebassets\insiderwebsite.StaticWebAssets.Manifest.cache
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\staticwebassets\insiderwebsite.StaticWebAssets.xml
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\scopedcss\bundle\insiderwebsite.styles.css
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\insiderwebsite.TagHelpers.input.cache
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\insiderwebsite.TagHelpers.output.cache
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorCoreGenerate.cache
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Index.cshtml.g.cs
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorTargetAssemblyInfo.cache
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorTargetAssemblyInfo.cs
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\insiderwebsite.Views.pdb
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\insiderwebsite.dll
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\ref\insiderwebsite.dll
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\insiderwebsite.pdb
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\insiderwebsite.genruntimeconfig.cache
+F:\APPMAN\Project\insiderwebsite\obj\Release\net5.0\insiderwebsite.csproj.CopyComplete
+F:\APPMAN\Project\Cloudsat\insiderwebsite\bin\Release\net5.0\appsettings.Development.json
+F:\APPMAN\Project\Cloudsat\insiderwebsite\bin\Release\net5.0\appsettings.json
+F:\APPMAN\Project\Cloudsat\insiderwebsite\bin\Release\net5.0\insiderwebsite.StaticWebAssets.xml
+F:\APPMAN\Project\Cloudsat\insiderwebsite\bin\Release\net5.0\insiderwebsite.exe
+F:\APPMAN\Project\Cloudsat\insiderwebsite\bin\Release\net5.0\insiderwebsite.deps.json
+F:\APPMAN\Project\Cloudsat\insiderwebsite\bin\Release\net5.0\insiderwebsite.runtimeconfig.json
+F:\APPMAN\Project\Cloudsat\insiderwebsite\bin\Release\net5.0\insiderwebsite.runtimeconfig.dev.json
+F:\APPMAN\Project\Cloudsat\insiderwebsite\bin\Release\net5.0\insiderwebsite.dll
+F:\APPMAN\Project\Cloudsat\insiderwebsite\bin\Release\net5.0\insiderwebsite.pdb
+F:\APPMAN\Project\Cloudsat\insiderwebsite\bin\Release\net5.0\insiderwebsite.Views.dll
+F:\APPMAN\Project\Cloudsat\insiderwebsite\bin\Release\net5.0\insiderwebsite.Views.pdb
+F:\APPMAN\Project\Cloudsat\insiderwebsite\bin\Release\net5.0\Newtonsoft.Json.dll
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\insiderwebsite.csproj.AssemblyReference.cache
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\insiderwebsite.GeneratedMSBuildEditorConfig.editorconfig
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\insiderwebsite.AssemblyInfoInputs.cache
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\insiderwebsite.AssemblyInfo.cs
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\insiderwebsite.csproj.CoreCompileInputs.cache
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\insiderwebsite.MvcApplicationPartsAssemblyInfo.cache
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorAssemblyInfo.cache
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorAssemblyInfo.cs
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\scopedcss\bundle\insiderwebsite.styles.css
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\staticwebassets\insiderwebsite.StaticWebAssets.Manifest.cache
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\staticwebassets\insiderwebsite.StaticWebAssets.Pack.cache
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\staticwebassets\msbuild.insiderwebsite.Microsoft.AspNetCore.StaticWebAssets.props
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\staticwebassets\msbuild.build.insiderwebsite.props
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\staticwebassets\msbuild.buildMultiTargeting.insiderwebsite.props
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\staticwebassets\msbuild.buildTransitive.insiderwebsite.props
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\insiderwebsite.TagHelpers.input.cache
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\insiderwebsite.TagHelpers.output.cache
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorCoreGenerate.cache
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Coustmize.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Index.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Pricing.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Registration.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\ViewPage.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorTargetAssemblyInfo.cache
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorTargetAssemblyInfo.cs
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\insiderwebsite.Views.pdb
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\insiderwebsite.csproj.CopyComplete
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\insiderwebsite.dll
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\refint\insiderwebsite.dll
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\insiderwebsite.pdb
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\insiderwebsite.genruntimeconfig.cache
+F:\APPMAN\Project\Cloudsat\insiderwebsite\obj\Release\net5.0\ref\insiderwebsite.dll
+E:\insiderwebsite\bin\Release\net5.0\appsettings.Development.json
+E:\insiderwebsite\bin\Release\net5.0\appsettings.json
+E:\insiderwebsite\bin\Release\net5.0\insiderwebsite.StaticWebAssets.xml
+E:\insiderwebsite\bin\Release\net5.0\insiderwebsite.exe
+E:\insiderwebsite\bin\Release\net5.0\insiderwebsite.deps.json
+E:\insiderwebsite\bin\Release\net5.0\insiderwebsite.runtimeconfig.json
+E:\insiderwebsite\bin\Release\net5.0\insiderwebsite.runtimeconfig.dev.json
+E:\insiderwebsite\bin\Release\net5.0\insiderwebsite.dll
+E:\insiderwebsite\bin\Release\net5.0\insiderwebsite.pdb
+E:\insiderwebsite\bin\Release\net5.0\insiderwebsite.Views.dll
+E:\insiderwebsite\bin\Release\net5.0\insiderwebsite.Views.pdb
+E:\insiderwebsite\bin\Release\net5.0\Newtonsoft.Json.dll
+E:\insiderwebsite\obj\Release\net5.0\insiderwebsite.csproj.AssemblyReference.cache
+E:\insiderwebsite\obj\Release\net5.0\insiderwebsite.GeneratedMSBuildEditorConfig.editorconfig
+E:\insiderwebsite\obj\Release\net5.0\insiderwebsite.AssemblyInfoInputs.cache
+E:\insiderwebsite\obj\Release\net5.0\insiderwebsite.AssemblyInfo.cs
+E:\insiderwebsite\obj\Release\net5.0\insiderwebsite.csproj.CoreCompileInputs.cache
+E:\insiderwebsite\obj\Release\net5.0\insiderwebsite.MvcApplicationPartsAssemblyInfo.cache
+E:\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorAssemblyInfo.cache
+E:\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorAssemblyInfo.cs
+E:\insiderwebsite\obj\Release\net5.0\scopedcss\bundle\insiderwebsite.styles.css
+E:\insiderwebsite\obj\Release\net5.0\staticwebassets\insiderwebsite.StaticWebAssets.Manifest.cache
+E:\insiderwebsite\obj\Release\net5.0\staticwebassets\insiderwebsite.StaticWebAssets.Pack.cache
+E:\insiderwebsite\obj\Release\net5.0\staticwebassets\msbuild.insiderwebsite.Microsoft.AspNetCore.StaticWebAssets.props
+E:\insiderwebsite\obj\Release\net5.0\staticwebassets\msbuild.build.insiderwebsite.props
+E:\insiderwebsite\obj\Release\net5.0\staticwebassets\msbuild.buildMultiTargeting.insiderwebsite.props
+E:\insiderwebsite\obj\Release\net5.0\staticwebassets\msbuild.buildTransitive.insiderwebsite.props
+E:\insiderwebsite\obj\Release\net5.0\insiderwebsite.TagHelpers.input.cache
+E:\insiderwebsite\obj\Release\net5.0\insiderwebsite.TagHelpers.output.cache
+E:\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorCoreGenerate.cache
+E:\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Coustmize.cshtml.g.cs
+E:\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Index.cshtml.g.cs
+E:\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Pricing.cshtml.g.cs
+E:\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
+E:\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Registration.cshtml.g.cs
+E:\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\ViewPage.cshtml.g.cs
+E:\insiderwebsite\obj\Release\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
+E:\insiderwebsite\obj\Release\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
+E:\insiderwebsite\obj\Release\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+E:\insiderwebsite\obj\Release\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
+E:\insiderwebsite\obj\Release\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
+E:\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorTargetAssemblyInfo.cache
+E:\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorTargetAssemblyInfo.cs
+E:\insiderwebsite\obj\Release\net5.0\insiderwebsite.Views.pdb
+E:\insiderwebsite\obj\Release\net5.0\insiderwebsite.csproj.CopyComplete
+E:\insiderwebsite\obj\Release\net5.0\insiderwebsite.dll
+E:\insiderwebsite\obj\Release\net5.0\refint\insiderwebsite.dll
+E:\insiderwebsite\obj\Release\net5.0\insiderwebsite.pdb
+E:\insiderwebsite\obj\Release\net5.0\insiderwebsite.genruntimeconfig.cache
+E:\insiderwebsite\obj\Release\net5.0\ref\insiderwebsite.dll
+C:\Users\HP\Desktop\insiderwebsite\bin\Release\net5.0\appsettings.Development.json
+C:\Users\HP\Desktop\insiderwebsite\bin\Release\net5.0\appsettings.json
+C:\Users\HP\Desktop\insiderwebsite\bin\Release\net5.0\insiderwebsite.StaticWebAssets.xml
+C:\Users\HP\Desktop\insiderwebsite\bin\Release\net5.0\insiderwebsite.exe
+C:\Users\HP\Desktop\insiderwebsite\bin\Release\net5.0\insiderwebsite.deps.json
+C:\Users\HP\Desktop\insiderwebsite\bin\Release\net5.0\insiderwebsite.runtimeconfig.json
+C:\Users\HP\Desktop\insiderwebsite\bin\Release\net5.0\insiderwebsite.runtimeconfig.dev.json
+C:\Users\HP\Desktop\insiderwebsite\bin\Release\net5.0\insiderwebsite.dll
+C:\Users\HP\Desktop\insiderwebsite\bin\Release\net5.0\insiderwebsite.pdb
+C:\Users\HP\Desktop\insiderwebsite\bin\Release\net5.0\insiderwebsite.Views.dll
+C:\Users\HP\Desktop\insiderwebsite\bin\Release\net5.0\insiderwebsite.Views.pdb
+C:\Users\HP\Desktop\insiderwebsite\bin\Release\net5.0\Newtonsoft.Json.dll
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\insiderwebsite.csproj.AssemblyReference.cache
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\insiderwebsite.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\insiderwebsite.AssemblyInfoInputs.cache
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\insiderwebsite.AssemblyInfo.cs
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\insiderwebsite.csproj.CoreCompileInputs.cache
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\insiderwebsite.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorAssemblyInfo.cache
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorAssemblyInfo.cs
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\scopedcss\bundle\insiderwebsite.styles.css
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\staticwebassets\insiderwebsite.StaticWebAssets.Manifest.cache
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\staticwebassets\insiderwebsite.StaticWebAssets.Pack.cache
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\staticwebassets\msbuild.insiderwebsite.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\staticwebassets\msbuild.build.insiderwebsite.props
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\staticwebassets\msbuild.buildMultiTargeting.insiderwebsite.props
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\staticwebassets\msbuild.buildTransitive.insiderwebsite.props
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\insiderwebsite.TagHelpers.input.cache
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\insiderwebsite.TagHelpers.output.cache
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorCoreGenerate.cache
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Coustmize.cshtml.g.cs
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Index.cshtml.g.cs
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Pricing.cshtml.g.cs
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\PrivacyPolicy.cshtml.g.cs
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Registration.cshtml.g.cs
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Termsandconditions.cshtml.g.cs
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\ViewPage.cshtml.g.cs
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorTargetAssemblyInfo.cache
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorTargetAssemblyInfo.cs
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\insiderwebsite.Views.pdb
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\insiderwebsite.csproj.CopyComplete
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\insiderwebsite.dll
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\refint\insiderwebsite.dll
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\insiderwebsite.pdb
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\insiderwebsite.genruntimeconfig.cache
+C:\Users\HP\Desktop\insiderwebsite\obj\Release\net5.0\ref\insiderwebsite.dll
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\appsettings.Development.json
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\appsettings.json
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.exe
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.deps.json
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.runtimeconfig.json
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.runtimeconfig.dev.json
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.dll
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.pdb
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.Views.dll
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.Views.pdb
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\Newtonsoft.Json.dll
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.csproj.AssemblyReference.cache
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.GeneratedMSBuildEditorConfig.editorconfig
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.AssemblyInfoInputs.cache
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.AssemblyInfo.cs
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.csproj.CoreCompileInputs.cache
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.MvcApplicationPartsAssemblyInfo.cache
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorAssemblyInfo.cache
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorAssemblyInfo.cs
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\scopedcss\bundle\insiderwebsite.styles.css
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\staticwebassets\insiderwebsite.StaticWebAssets.Manifest.cache
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.TagHelpers.input.cache
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.TagHelpers.output.cache
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorCoreGenerate.cache
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Coustmize.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Index.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Pricing.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\PrivacyPolicy.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Registration.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Termsandconditions.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\ViewPage.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorTargetAssemblyInfo.cache
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorTargetAssemblyInfo.cs
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.Views.pdb
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.csproj.CopyComplete
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.dll
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.pdb
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.genruntimeconfig.cache
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\ref\insiderwebsite.dll
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\ref\insiderwebsite.dll
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\staticwebassets\insiderwebsite.StaticWebAssets.xml
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\ThankYouPage.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Aboutus.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Careers.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\ContactUs.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Downloads.cshtml.g.cs
+F:\APPMAN\Project\Cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\JOBOpening.cshtml.g.cs
+D:\Appman\Website Admin\insiderwebsite\bin\Release\net5.0\appsettings.Development.json
+D:\Appman\Website Admin\insiderwebsite\bin\Release\net5.0\appsettings.json
+D:\Appman\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.StaticWebAssets.xml
+D:\Appman\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.exe
+D:\Appman\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.deps.json
+D:\Appman\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.runtimeconfig.json
+D:\Appman\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.runtimeconfig.dev.json
+D:\Appman\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.dll
+D:\Appman\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.pdb
+D:\Appman\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.Views.dll
+D:\Appman\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.Views.pdb
+D:\Appman\Website Admin\insiderwebsite\bin\Release\net5.0\Newtonsoft.Json.dll
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.csproj.AssemblyReference.cache
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.GeneratedMSBuildEditorConfig.editorconfig
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.AssemblyInfoInputs.cache
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.AssemblyInfo.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.csproj.CoreCompileInputs.cache
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.MvcApplicationPartsAssemblyInfo.cache
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorAssemblyInfo.cache
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorAssemblyInfo.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\scopedcss\bundle\insiderwebsite.styles.css
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\staticwebassets\insiderwebsite.StaticWebAssets.Manifest.cache
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\staticwebassets\insiderwebsite.StaticWebAssets.Pack.cache
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\staticwebassets\msbuild.insiderwebsite.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\staticwebassets\msbuild.build.insiderwebsite.props
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\staticwebassets\msbuild.buildMultiTargeting.insiderwebsite.props
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\staticwebassets\msbuild.buildTransitive.insiderwebsite.props
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.TagHelpers.input.cache
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.TagHelpers.output.cache
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorCoreGenerate.cache
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Aboutus.cshtml.g.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Careers.cshtml.g.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\ContactUs.cshtml.g.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Coustmize.cshtml.g.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Downloads.cshtml.g.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Index.cshtml.g.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\JOBOpening.cshtml.g.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Pricing.cshtml.g.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\PrivacyPolicy.cshtml.g.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Registration.cshtml.g.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Termsandconditions.cshtml.g.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\ThankYouPage.cshtml.g.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\ViewPage.cshtml.g.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorTargetAssemblyInfo.cache
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorTargetAssemblyInfo.cs
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.Views.pdb
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.csproj.CopyComplete
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.dll
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\refint\insiderwebsite.dll
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.pdb
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.genruntimeconfig.cache
+D:\Appman\Website Admin\insiderwebsite\obj\Release\net5.0\ref\insiderwebsite.dll
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\appsettings.Development.json
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\appsettings.json
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.StaticWebAssets.xml
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.exe
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.deps.json
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.runtimeconfig.json
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.runtimeconfig.dev.json
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.dll
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.pdb
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.Views.dll
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\insiderwebsite.Views.pdb
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\bin\Release\net5.0\Newtonsoft.Json.dll
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.csproj.AssemblyReference.cache
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.AssemblyInfoInputs.cache
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.AssemblyInfo.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.csproj.CoreCompileInputs.cache
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorAssemblyInfo.cache
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorAssemblyInfo.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\scopedcss\bundle\insiderwebsite.styles.css
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\staticwebassets\insiderwebsite.StaticWebAssets.Manifest.cache
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\staticwebassets\insiderwebsite.StaticWebAssets.Pack.cache
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\staticwebassets\msbuild.insiderwebsite.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\staticwebassets\msbuild.build.insiderwebsite.props
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\staticwebassets\msbuild.buildMultiTargeting.insiderwebsite.props
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\staticwebassets\msbuild.buildTransitive.insiderwebsite.props
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.TagHelpers.input.cache
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.TagHelpers.output.cache
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorCoreGenerate.cache
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Aboutus.cshtml.g.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Careers.cshtml.g.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\ContactUs.cshtml.g.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Coustmize.cshtml.g.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Downloads.cshtml.g.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Index.cshtml.g.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\JOBOpening.cshtml.g.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Pricing.cshtml.g.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\PrivacyPolicy.cshtml.g.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Registration.cshtml.g.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\Termsandconditions.cshtml.g.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\ThankYouPage.cshtml.g.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Home\ViewPage.cshtml.g.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\_ViewImports.cshtml.g.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\Razor\Views\_ViewStart.cshtml.g.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorTargetAssemblyInfo.cache
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.RazorTargetAssemblyInfo.cs
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.Views.pdb
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.csproj.CopyComplete
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.dll
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\refint\insiderwebsite.dll
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.pdb
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\insiderwebsite.genruntimeconfig.cache
+C:\Users\HP\OneDrive\Desktop\Deepak\cloudsat\Website Admin\insiderwebsite\obj\Release\net5.0\ref\insiderwebsite.dll

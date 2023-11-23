@@ -1,0 +1,288 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "Category Edit";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+}
+
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="fe fe-pie-chart mr-1"></i> Admin Console</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Category</li>
+    </ol>
+    <div class="ml-auto">
+        <a href="~/Category/CategoryList" class="btn btn-primary btn-icon btn-sm text-white mr-2">
+            <span>
+                <i class="fe fe-plus"></i>
+            </span> View
+        </a>
+
+    </div>
+</div>
+
+<div class="col-md-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="col-md-11">
+                <div class="card-title">Catgory Edit</div>
+            </div>
+
+        </div>
+        <div class="card-body">
+            <div>
+                <form action="#" role="form" class="validate" id="formPost">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div id="treeview">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Category Name</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="name" name="name" placeholder="Category Name" required />
+                                    </div>
+                                </div>
+                                @*<div class="col-lg-3">
+                                <div class="form-group">
+                                <label class="control-label">Alias</label>
+                                <input type="text" class="form-control" autocomplete="off" id="alias" name="alias" placeholder="Alias" required />
+
+                                </div>
+                                </div>*@
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Icon</label>
+                                        <input type="file" class="form-control" autocomplete="off" id="icon" name="icon" placeholder="Icon" />
+                                    </div>
+                                </div>
+                                @*<div class="col-lg-3">
+                                <div class="form-group">
+                                <label class="control-label">Order</label>
+                                <input type="number" class="form-control" autocomplete="off" id="Order" name="Order" placeholder="Order" required />
+                                </div>
+                                </div>*@
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <button type="button" id="btnUpdate" class="btn btn-primary">Update</button>
+
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
+
+
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <script>
+        var categoryId = @ViewBag.categoryid ;
+        var parentCategoryId;
+
+
+
+        $(function () {
+            loadSingleCategory()
+            $('#treeview').jstree({
+                'core': {
+                    'data': {
+                        'url': '/Category/WithPrimaryNodes',
+                        'data': function (node) {
+                            return { 'id': node.id };
+                        }
+                    }
+                }
+            }).on('ready.jstree', function () {
+                $('#treeview').jstree("open_all");
+                var t = $('#treeview').jstree(true);
+                var n = t.get_node(parentCategoryId);
+
+                t.select_node(n);
+                n = t.get_selected(true);
+                console.log(n[0].id, n[0]);
+            })
+            $('#treeview').on('changed.jstree', function (e, data) {
+                var i, j, r = [];
+                for (i = 0, j = data.selected.length; i < j; i++) {
+                    r.push(data.instance.get_node(data.selected[i]));
+                }
+                parentCategoryId = r[0].id;
+
+            }).jstree();
+
+
+
+            function loadSingleCategory() {
+                $.ajax({
+                    type: "GET",
+                    url: "@apiUrl/api/Category/GetSingleCategory/" + categoryId,
+                    contentType: "application/json; charset=utf-8",
+                    headers: {
+                        "authorization": "Bearer @Context.Session.GetString("TokenTxt")"
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        //console.log(data);
+                        if (data) {
+                            $('#name').val(data.categoryName);
+                            if (data.parent != null)
+                                parentCategoryId = data.parent
+                            else
+                                parentCategoryId = "0"
+
+                            // $('#Order').val(data.order);
+                            // $('#alias').val(data.alias);
+
+                            // loadParent();
+
+
+
+                        } else {
+                            sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                        }
+                    },
+                    error: function (data) {
+                        if (data.status == 401) {
+                            window.location.replace('/Message/TokenExpire');
+                        } else if (data.status == 403) {
+                            window.location.replace('/Message/Unauthorize');
+                        }
+                    }
+                });
+            }
+
+
+
+            $("#btnUpdate").click(function (e) {
+                if (!document.getElementById("formPost").checkValidity()) {
+                    e.preventDefault();
+                } else {
+
+                    imgPath = '';
+                    var totalFiles = document.getElementById('icon').files.length;
+                    if (totalFiles > 0) {
+                        uploadFile();
+                    }
+
+                    if (parentCategoryId == 0) {
+                        parentCategoryId = null;
+                    }
+
+                    var model = {
+                        categoryId: categoryId,
+                        name: $.trim($("#name").val()),
+                        Parent: parseInt(parentCategoryId),
+                        // alias: $.trim($("#alias").val()),
+                        icon: imgPath,
+                        // Order: parseInt($("#Order").val()),
+                        createdBy: @Context.Session.GetInt32("UserId"),
+
+                    }
+                    console.log(model)
+                    $.ajax({
+                        type: "POST",
+                        url: "@apiUrl/api/Category/UpdateCategory",
+                        data: JSON.stringify(model),
+                        contentType: "application/json; charset=utf-8",
+                        headers: {
+                            "authorization": "Bearer @Context.Session.GetString("TokenTxt")"
+                        },
+
+                        success: function (data, statusText, xhr) {
+                            console.log(data)
+                            if (xhr.status === 200) {
+                                $('#categoryTable').DataTable().ajax.reload(null, false);
+                                sweetAlert({
+                                    html: true,
+                                    title: "Category",
+                                    text: "Successfully updated!",
+                                    type: "success"
+                                });
+
+                            } else if (data.status === "duplicate") {
+                                sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                            } else if (data.status === "error") {
+                                sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                            } else {
+                                sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                            }
+                        },
+                        error: function (data) {
+                            console.log(data);
+                            if (data.status == 401) {
+                                window.location.replace('/Message/TokenExpire');
+                            } else if (data.status == 403) {
+                                window.location.replace('/Message/Unauthorize');
+                            } else if (data.status == 400) {
+                                sweetAlert("Validation Alert!", "Please check input data!", "warning");
+                            }
+                        }
+                    });
+                }
+
+
+            });
+
+
+        });
+
+
+
+
+        function uploadFile() {
+            var totalFiles = document.getElementById('icon').files.length;
+            if (totalFiles > 0) {
+                var formData = new FormData();
+                var files = document.getElementById('icon').files;
+                formData.append("file", files[0]);
+                $.ajax(
+                    {
+                        url: "/Upload/ImgUpload",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        async: false,
+                        type: "POST",
+                        success: function (data) {
+                            imgPath = data;
+
+                        },
+                        error: function (data) {
+                            window.location.replace('/Message/SessionExpire');
+                        }
+                    }
+                );
+            }
+
+        }
+
+    </script>
+}

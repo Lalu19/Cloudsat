@@ -1,0 +1,286 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "PlanningAndApplication Edit";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+}
+
+
+<style>
+    .btn-primary {
+        color: #fff;
+        background: #3b16cc !important;
+        border-color: #3b16cc !important;
+    }
+
+    .btn-success {
+        color: #fff;
+        background: #3b16cc !important;
+        border-color: #3b16cc;
+    }
+
+    a {
+        color: #3b16cc;
+    }
+</style>
+<!-- PAGE-HEADER -->
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="fe fe-file-text mr-1"></i>Admin Consol</a></li>
+        <li class="breadcrumb-item active" aria-current="page">PlanningAndApplication Edit</li>
+    </ol>
+    <div class="ml-auto">
+        <a href="~/PlanningAndApplication/PlanningAndApplicationList" class="btn btn-primary btn-icon btn-sm text-white mr-2">
+            <span>
+                <i class="fe fe-plus"></i>
+            </span> View
+        </a>
+    </div>
+</div>
+<!-- PAGE-HEADER END -->
+
+<div class="row">
+    <div class="col-md">
+        <div class="card overflow-hidden">
+            <div class="card-header">
+                <h3 class="card-title">PlanningAndApplication Edit</h3>
+            </div>
+
+            <div class="card-body">
+                <form action="#" role="form" class="validate" id="formPost">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div id="treeview">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="fullname">Planning Name </label>
+                                        <select class="form-control" id="Planningname" required></select>
+                                    </div>
+                                </div>
+                               
+                                
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <button type="button" id="SaveBtn" class="btn btn-primary">Save</button>
+
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+
+
+    <script>
+
+        GetPlanning()
+        function GetPlanning(Id) {
+            var opt = '';
+            $.ajax({
+                type: "GET",
+                url: "@apiUrl/api/PlanningMaster/GetPlanningMasterList",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                   
+                    var options = [];
+                    options.push('<option value="">--Select Planning--</option>');
+                    for (var i = 0; i < data.data.length; i++) {
+
+                        if (Id == data.data[i].planningId) {
+                            opt = 'selected'
+                        } else {
+                            opt = '';
+                        }
+                        options.push('<option value="' + data.data[i].planningId + '" ' + opt + '>' + data.data[i].planningName + '</option>');
+                    }
+                    $("#Planningname").html(options.join(''));
+                },
+
+                error: function (data) {
+                    if (data.status == 401) {
+                        window.location.replace('/Message/TokenExpire');
+                    } else if (data.status == 403) {
+                        window.location.replace('/Message/Unauthorize');
+                    }
+                }
+            });
+        }
+
+        var planningandapplicationid = @ViewBag.planningandapplicationid
+        var parentId;
+        $(function () {
+            loadSinglplanningandapplication()
+            $('#treeview').jstree({
+                'core': {
+                    'data': {
+                        'url': '/PlanningAndApplication/WithPrimaryNodes',
+                        'data': function (node) {
+                            return { 'id': node.id };
+                        }
+                    }
+                }
+            }).on('ready.jstree', function () {
+                $('#treeview').jstree("open_all");
+                var t = $('#treeview').jstree(true);
+                var n = t.get_node(parentId);
+
+                t.select_node(n);
+                n = t.get_selected(true);
+                console.log(n[0].id, n[0]);
+            })
+            $('#treeview').on('changed.jstree', function (e, data) {
+                var i, j, r = [];
+                for (i = 0, j = data.selected.length; i < j; i++) {
+                    r.push(data.instance.get_node(data.selected[i]));
+                }
+                parentId = r[0].id;
+
+            }).jstree();
+
+        function loadSinglplanningandapplication() {
+            $.ajax({
+                type: "GET",
+                url: "@apiUrl/api/PlanningAndApplication/GetSinglePlanningAndApplication/" + planningandapplicationid,
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                    "authorization": "Bearer @Context.Session.GetString("TokenTxt")"
+                },
+                dataType: "json",
+                success: function (data) {
+                   
+                    if (data) {
+                       
+                        GetPlanning(data.planningId);
+                            if (data.applicationMasterId != null)
+                                parentId = data.applicationMasterId
+                            else
+                                parentId = "0"
+
+
+                        // loadParent();
+                    }
+                    else {
+                        sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                    }
+                },
+                error: function (data) {
+                    if (data.status == 401) {
+                        window.location.replace('/Message/TokenExpire');
+                    } else if (data.status == 403) {
+                        window.location.replace('/Message/Unauthorize');
+                    }
+                }
+            });
+        }
+
+
+        $("#SaveBtn").click(function (e) {
+            if (!document.getElementById("formPost").checkValidity()) {
+                e.preventDefault();
+            } else {
+                //imgPath = '';
+                //var currentImageSrc = '';
+                //currentImageSrc = $('#getimg').attr('src');
+
+                //if ($('#image').val() != '' && $('#image').val() != 'Choose file') {
+                //    uploadFile();
+                //} else if (currentImageSrc != '') {
+                //    imgPath = currentImageSrc;
+                //}
+                    if (parentId == 0) {
+                        parentId = null;
+                    }
+                var model = {
+                    planningandapplicationid: planningandapplicationid,
+                    planningId: parseInt($("#Planningname").val()),
+                        applicationMasterId: parseInt(parentId),
+                    //imageUpload: imgPath,
+                    updatedBy: @Context.Session.GetInt32("UserId"),
+                }
+               
+                $.ajax({
+                    type: "POST",
+                    url: "@apiUrl/api/PlanningAndApplication/updateplanningandapplication",
+                    data: JSON.stringify(model),
+                    contentType: "application/json; charset=utf-8",
+                    headers: {
+                        "authorization": "Bearer @Context.Session.GetString("TokenTxt")"
+                    },
+
+                    success: function (data, statusText, xhr) {
+                        
+                        if (xhr.status === 200) {
+                            $('#page_Tb').DataTable().ajax.reload(null, false);
+                            sweetAlert({
+                                html: true,
+                                icon: "success",
+                                title: "Planning And Application",
+                                text: "Successfully updated!",
+                                type: "success"
+                            });
+                        } else if (data.status === "duplicate") {
+                            sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                        } else if (data.status === "error") {
+                            sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                        } else {
+                            sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                        }
+                    },
+                    error: function (data) {
+                        
+                        if (data.status == 401) {
+                            window.location.replace('/Message/TokenExpire');
+                        } else if (data.status == 403) {
+                            window.location.replace('/Message/Unauthorize');
+                        } else if (data.status == 400) {
+                            sweetAlert("Validation Alert!", "Please check input data!", "warning");
+                        }
+                    }
+                });
+            }
+        });
+       });
+        //function uploadFile() {
+        //    var totalFiles = document.getElementById('image').files.length;
+        //    if (totalFiles > 0) {
+        //        var formData = new FormData();
+        //        var files = document.getElementById('image').files;
+        //        formData.append("file", files[0]);
+        //        $.ajax(
+        //            {
+        //                url: "/Upload/ImgUpload",
+        //                data: formData,
+        //                processData: false,
+        //                contentType: false,
+        //                async: false,
+        //                type: "POST",
+        //                success: function (data) {
+        //                    imgPath = data;
+        //                    $('#getimg').attr('src', imgPath);
+        //                    resetInputFile('#formPost');
+        //                }
+        //            }
+        //        );
+        //    }
+
+        //}
+    </script>
+}

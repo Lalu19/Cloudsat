@@ -1,0 +1,242 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@using Syncfusion.EJ2
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "Termsandconditions Create";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+}
+
+<style>
+    .btn-primary {
+        color: #fff;
+        background: #3b16cc !important;
+        border-color: #3b16cc 74 !important;
+    }
+
+    #back-to-top {
+        background: #2d25c5;
+    }
+
+        #back-to-top:hover {
+            color: #3b16cc !important;
+            border: 2px solid #3b16cc;
+        }
+
+    .slide-menu a.active {
+        color: #3b16cc !important;
+    }
+
+    .sweet-alert button {
+        background-color: #0052cc !important;
+    }
+
+    a {
+        color: #3b16cc;
+    }
+</style>
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="fe fe-pie-chart mr-1"></i> Admin Console</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Termsandconditions</li>
+    </ol>
+    <div class="ml-auto">
+        <a href="~/Termsandconditions/TermsandconditionsList" class="btn btn-primary btn-icon btn-sm text-white mr-2">
+            <span>
+                <i class="fe fe-plus"></i>
+            </span> View
+        </a>
+
+    </div>
+</div>
+
+<div class="col-md-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="col-md-11">
+                <div class="card-title">Termsandconditions Create</div>
+            </div>
+        </div>
+        <div class="card-body" id="section">
+            <div>
+                <form action="#" role="form" class="validate" id="formPost">
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            @*<div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Terms and conditions </label>
+                                            <br />
+                                            <textarea type="text" id="Termsandconditions" class="form-control" autocomplete="off" data-fieldtype="Small Text" autofocus="autofocus" placeholder="Terms and conditions" style="height: 150px; width:500px; "></textarea>
+
+                                        </div>
+
+                                    </div>
+                                </div>*@
+                            <div class="card">
+                            
+                                <ejs-richtexteditor id="editor1" name="editor1" showCharCount="true" actionBegin="handleFullScreen" actionComplete="actionCompleteHandler" created="created" height="500px">
+                                    <e-content-template>
+                                    
+                                    </e-content-template>
+                                    <e-richtexteditor-toolbarsettings items="@ViewBag.tools"></e-richtexteditor-toolbarsettings>
+                                    <e-richtexteditor-quicktoolbarsettings table="@ViewBag.table"></e-richtexteditor-quicktoolbarsettings>
+
+                                </ejs-richtexteditor>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <button type="button" id="SaveBtn" class="btn btn-primary">Save</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    var rteObj, myCodeMirror, textArea;
+    function created() {
+        rteObj = this;
+        textArea = rteObj.contentModule.getEditPanel();
+    }
+    function mirrorConversion(e) {
+        var id = rteObj.getID() + 'mirror-view';
+        var mirrorView = rteObj.element.querySelector('#' + id);
+        var charCount = rteObj.element.querySelector('.e-rte-character-count');
+        if (e.targetItem === 'Preview') {
+            textArea.style.display = 'block';
+            mirrorView.style.display = 'none';
+            textArea.innerHTML = myCodeMirror.getValue();
+            charCount.style.display = 'block';
+        }
+        else {
+            if (!mirrorView) {
+                mirrorView = ej.base.createElement('div', { className: 'e-content' });
+                mirrorView.id = id;
+                textArea.parentNode.appendChild(mirrorView);
+            }
+            else {
+                mirrorView.innerHTML = '';
+            }
+            textArea.style.display = 'none';
+            mirrorView.style.display = 'block';
+            renderCodeMirror(mirrorView, defaultRTE.value);
+            charCount.style.display = 'none';
+        }
+    }
+    function renderCodeMirror(mirrorView, content) {
+        myCodeMirror = CodeMirror(mirrorView, {
+            value: content,
+            lineNumbers: true,
+            mode: 'text/html',
+            lineWrapping: true,
+        });
+    }
+    function handleFullScreen(e) {
+        var sbCntEle = document.querySelector('.sb-content.e-view');
+        var sbHdrEle = document.querySelector('.sb-header.e-view');
+        if (e.targetItem === 'Maximize') {
+            if (ej.base.Browser.isDevice && ej.base.Browser.isIos) {
+                ej.base.addClass([sbCntEle, sbHdrEle], ['hide-header']);
+            }
+        }
+        else if (e.targetItem === 'Minimize') {
+            if (ej.base.Browser.isDevice && ej.base.Browser.isIos) {
+                ej.base.removeClass([sbCntEle, sbHdrEle], ['hide-header']);
+            }
+        }
+    }
+    function actionCompleteHandler(e) {
+        if (e.targetItem && (e.targetItem === 'SourceCode' || e.targetItem === 'Preview')) {
+            this.sourceCodeModule.getPanel().style.display = 'none';
+            mirrorConversion(e);
+        }
+        else {
+            setTimeout(function () { rteObj.toolbarModule.refreshToolbarOverflow(); }, 1000);
+        }
+    }
+</script>
+@section scripts{
+   
+
+    <script>
+
+        $("#SaveBtn").click(function (e) {
+           
+            if (!document.getElementById("formPost").checkValidity()) {
+                e.preventDefault();
+            } else {
+
+
+                var model = {
+
+                    termsandconditionText: rteObj.value,
+
+
+                    createdBy: @Context.Session.GetInt32("UserId"),
+
+                }
+                
+                $.ajax({
+                    type: "POST",
+                    url: "@apiUrl/api/Termsandconditions/TermsandconditionsCreate",
+                    data: JSON.stringify(model),
+                    contentType: "application/json; charset=utf-8",
+
+                    dataType: "json",
+                    success: function (data, statusText, xhr) {
+                        if (xhr.status === 200) {
+                            // $('#section').DataTable().ajax.reload(null, false);
+                            sweetAlert({
+                                html: true,
+                                title: "Termsandconditions",
+                                text: "Successfully Added!",
+                                type: "success"
+                            }, function () {
+                                location.reload();
+                            });
+                        } else if (data.status === "duplicate") {
+                            sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                        } else if (data.status === "error") {
+                            sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                        } else {
+                            sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                        }
+                    },
+                    error: function (data) {
+                        if (data.status == 401) {
+                            window.location.replace('/Message/TokenExpire');
+                        } else if (data.status == 403) {
+                            window.location.replace('/Message/Unauthorize');
+                        } else if (data.status == 400) {
+                            sweetAlert("Validation Alert!", "Please check input data!", "warning");
+                        }
+                    }
+
+                });
+
+
+            }
+
+        });
+
+
+
+
+
+    </script>
+
+
+}

@@ -1,0 +1,338 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "ApplicationMaster Create";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+}
+
+<style>
+    .btn-primary {
+        color: #fff;
+        background: #3b16cc !important;
+        border-color: #3b16cc 74 !important;
+    }
+
+    #back-to-top {
+        background: #2d25c5;
+    }
+
+        #back-to-top:hover {
+            color: #3b16cc !important;
+            border: 2px solid #3b16cc;
+        }
+
+    .slide-menu a.active {
+        color: #3b16cc !important;
+    }
+
+    .sweet-alert button {
+        background-color: #0052cc !important;
+    }
+
+    a {
+        color: #3b16cc;
+    }
+</style>
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="fe fe-pie-chart mr-1"></i> Admin Console</a></li>
+        <li class="breadcrumb-item active" aria-current="page">ApplicationMaster Create</li>
+    </ol>
+    <div class="ml-auto">
+        <a href="~/ApplicationMaster/ApplicationMasterList" class="btn btn-primary btn-icon btn-sm text-white mr-2">
+            <span>
+                <i class="fe fe-plus"></i>
+            </span> ApplicationMaster List
+        </a>
+
+    </div>
+</div>
+
+<div class="col-md-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="col-md-11">
+                <div class="card-title">ApplicationMaster Create</div>
+            </div>
+        </div>
+        <div class="card-body" id="section">
+            <div>
+                <form action="#" role="form" class="validate" id="formPost">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div id="treeview">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Name</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="ApplicationMastername"   placeholder="Name" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Monthly Price</label>
+                                        <input type="number" class="form-control" autocomplete="off" id="ApplicationMasterMonthlyPrice"   placeholder="Monthly Price" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Halfyearly Price</label>
+                                        <input type="number" class="form-control" autocomplete="off" id="ApplicationMasterHalfyearlyPrice"   placeholder="Halfyearly Price" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Quarterly Price</label>
+                                        <input type="number" class="form-control" autocomplete="off" id="ApplicationMasterQuarterlyPrice" placeholder="Quarterly Price" required />
+                                    </div>
+                                </div>
+
+                                
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Yearly Price</label>
+                                        <input type="number" class="form-control" autocomplete="off" id="ApplicationMasterYearlyPrice" placeholder="Yearly Price" required />
+                                    </div>
+                                </div>
+
+                               <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Package Name</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="packagename"   placeholder="Package Name" required />
+                                    </div>
+                                </div>
+                               
+                                <div class="col-lg-3">
+                                 <div class="form-group">
+                                        <label class="control-label">Logo Upload</label>
+                                   <input type="file" class="form-control" id="image"  />
+                                 </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="hint-name">Front Page Display</label>
+                                        <select class="form-control" id="Frontpage" type="text">
+                                            <option value="" selected>--Choose--</option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                       
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <button type="button" id="SaveBtn" class="btn btn-primary">Save</button>
+
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+
+    <script>
+
+        var ApplicationMasterId;
+
+
+        function showTable() {
+            $('#tableView').show();
+            $('#treeview').hide();
+        }
+        function showTree() {
+            $('#tableView').hide();
+            $('#treeview').show();
+        }
+
+
+        $(function () {
+            $('#treeview').jstree({
+                'core': {
+                    'data': {
+                        'url': '/ApplicationMaster/WithPrimaryNodes',
+                        'data': function (node) {
+                            return { 'id': node.id };
+                        }
+                    }
+                }
+            });
+
+
+            $('#treeview').on('changed.jstree', function (e, data) {
+                var i, j, r = [];
+                for (i = 0, j = data.selected.length; i < j; i++) {
+                    r.push(data.instance.get_node(data.selected[i]));
+
+                }
+                ApplicationMasterId = r[0].id;
+
+
+                // $('#event_result').html('Selected: ' + r.join(', '));
+            }).jstree();
+
+
+          $("#SaveBtn").click(function (e) {
+            if (!document.getElementById("formPost").checkValidity()) {
+                e.preventDefault();
+            } else {
+               if (ApplicationMasterId != null) {
+                    imgPath = '';
+                    var totalFiles = document.getElementById('image').files.length;
+                    if (totalFiles > 0) {
+                    uploadFile();
+                }
+                            if (ApplicationMasterId == 0) {
+                                ApplicationMasterId = null;
+                            }
+                    
+                    var model = {
+                        applicationMasterName: $.trim($("#ApplicationMastername").val()),
+                        applicationMasterLogo: imgPath,
+                        applicationMasterMonthlyPrice: $.trim($("#ApplicationMasterMonthlyPrice").val()),
+                        applicationMasterQuarterlyPrice: $.trim($("#ApplicationMasterQuarterlyPrice").val()),
+                        applicationMasterHalfyearlyPrice: $.trim($("#ApplicationMasterHalfyearlyPrice").val()),
+                        applicationMasterYearlyPrice: $.trim($("#ApplicationMasterYearlyPrice").val()),
+                        packagename: $.trim($("#packagename").val()),
+                                parent: parseInt(ApplicationMasterId),
+                        frontpagedisplay: $.trim($("#Frontpage").val()),
+                        createdBy: @Context.Session.GetInt32("UserId"),
+                    
+                    }
+                    
+                    $.ajax({
+                        type: "POST",
+                        url: "@apiUrl/api/ApplicationMaster/CreateApplicationMaster",
+                        data: JSON.stringify(model),
+                        contentType: "application/json; charset=utf-8",
+                    
+                        dataType: "json",
+                        success: function (data, statusText, xhr) {
+                            if (xhr.status === 200) {
+                                // $('#section').DataTable().ajax.reload(null, false);
+                                sweetAlert({
+                                    html: true,
+                                    title: "Application Master",
+                                    text: "Successfully Created!",
+                                    type: "success"
+                                }, function () {
+                                    location.reload();
+                                });
+                            } else if (data.status === "duplicate") {
+                                sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                            } else if (data.status === "error") {
+                                sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                            } else {
+                                sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                            }
+                        },
+                        error: function (data) {
+                            if (data.status == 401) {
+                                window.location.replace('/Message/TokenExpire');
+                            } else if (data.status == 403) {
+                                window.location.replace('/Message/Unauthorize');
+                            } else if (data.status == 400) {
+                                sweetAlert("Validation Alert!", "Please check input data!", "warning");
+                            }
+                        }
+                    
+                    });
+               }
+                    else {
+                        sweetAlert("Validation Alert!", "Please Select Parrent Application", "warning");
+                    }
+
+            }
+
+        });
+
+        });
+        function uploadFile() {
+            var totalFiles = document.getElementById('image').files.length;
+            if (totalFiles > 0) {
+                var formData = new FormData();
+                var files = document.getElementById('image').files;
+                formData.append("file", files[0]);
+                $.ajax(
+                    {
+                        url: "/Upload/ImgUpload",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        async: false,
+                        type: "POST",
+                        success: function (data) {
+                            imgPath = data;
+
+                        },
+                        error: function (data) {
+                            window.location.replace('/Message/SessionExpire');
+                        }
+                    }
+                );
+            }
+
+        }
+            function parentApplicationList(id) {
+                var opt = '';
+                $.ajax({
+                    type: "GET",
+                    url: '@apiUrl/api/ApplicationMaster/GetApplicationMasterList',
+
+                    headers: {
+                        "authorization": "Bearer @Context.Session.GetString("TokenTxt")"
+
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        var options = [];
+                        
+                        options.push('<option>Primary</option>');
+                        for (var i = 0; i < data.length; i++) {
+                            if (applicationMasterId != data[i].applicationMasterId) {
+                                if (id == data[i].applicationMasterId) {
+                                    opt = 'selected'
+                                } else {
+                                    opt = '';
+                                }
+                                options.push('<option value="' + data[i].applicationMasterId + '" </option>');
+                            }
+                        }
+                        $("#Parent").html(options.join(''));
+                    },
+                    error: function (data) {
+                        if (data.status == 401) {
+                            window.location.replace('/Message/TokenExpire');
+                        } else if (data.status == 403) {
+                            window.location.replace('/Message/Unauthorize');
+                        }
+                    }
+                });
+            }
+
+    </script>
+
+
+}

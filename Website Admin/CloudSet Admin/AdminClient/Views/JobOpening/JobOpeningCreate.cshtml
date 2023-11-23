@@ -1,0 +1,221 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "JobOpening Create";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+}
+
+<style>
+    .btn-primary {
+        color: #fff;
+        background: #3b16cc !important;
+        border-color: #3b16cc 74 !important;
+    }
+
+    #back-to-top {
+        background: #2d25c5;
+    }
+
+        #back-to-top:hover {
+            color: #3b16cc !important;
+            border: 2px solid #3b16cc;
+        }
+
+    .slide-menu a.active {
+        color: #3b16cc !important;
+    }
+
+    .sweet-alert button {
+        background-color: #0052cc !important;
+    }
+
+    a {
+        color: #3b16cc;
+    }
+</style>
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="fe fe-pie-chart mr-1"></i> Admin Console</a></li>
+        <li class="breadcrumb-item active" aria-current="page">JobOpening</li>
+    </ol>
+    <div class="ml-auto">
+        <a href="~/JobOpening/JobOpeningList" class="btn btn-primary btn-icon btn-sm text-white mr-2">
+            <span>
+                <i class="fe fe-plus"></i>
+            </span> View
+        </a>
+
+    </div>
+</div>
+
+<div class="col-md-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="col-md-11">
+                <div class="card-title">JobOpening Create</div>
+            </div>
+        </div>
+        <div class="card-body" id="section">
+            <div>
+                <form action="#" role="form" class="validate" id="formPost">
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">JobPositionName</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="JobPositionName" name="name" placeholder="JobPositionName" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Country</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="country" name="name" placeholder="country" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">City</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="city" name="name" placeholder="city" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">State</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="state" name="name" placeholder="state" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Industry</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="industry" name="name" placeholder="industry" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">JobType</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="jobType" name="name" placeholder="jobType" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">WorkExperience</label>
+                                        <input type="text" class="form-control" autocomplete="off" id="workExperience" name="name" placeholder="workExperience" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">DateOpened</label>
+                                        <input type="date" class="form-control" autocomplete="off" id="dateOpened" name="name" placeholder="dateOpened" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label class="control-label">JobDescription</label>
+                                        <textarea type="text" id="jobDescription" class="form-control" autocomplete="off" data-fieldtype="Small Text" autofocus="autofocus" placeholder="jobDescription" style="height:150px; width:500px; "></textarea>
+
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <button type="button" id="SaveBtn" class="btn btn-primary">Save</button>
+
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+
+    <script>
+
+
+
+        $("#SaveBtn").click(function (e) {
+            if (!document.getElementById("formPost").checkValidity()) {
+                e.preventDefault();
+            } else {
+
+                var model = {
+
+                    jobPositionName: $.trim($("#JobPositionName").val()),
+                    country: $.trim($("#country").val()),
+                    city: $.trim($("#city").val()),
+                    state: $.trim($("#state").val()),
+                    industry: $.trim($("#industry").val()),
+                    jobType: $.trim($("#jobType").val()),
+                    workExperience: $.trim($("#workExperience").val()),
+                    dateOpened: $.trim($("#dateOpened").val()) == '' ? null : $.trim($("#dateOpened").val().replace(/\//g, '-')),
+                    jobDescription: $.trim($("#jobDescription").val()),
+                    createdBy: @Context.Session.GetInt32("UserId"),
+
+                }
+                
+                $.ajax({
+                    type: "POST",
+                    url: "@apiUrl/api/JobOpening/JobOpeningCreate",
+                    data: JSON.stringify(model),
+                    contentType: "application/json; charset=utf-8",
+
+                    dataType: "json",
+                    success: function (data, statusText, xhr) {
+                        if (xhr.status === 200) {
+                            // $('#section').DataTable().ajax.reload(null, false);
+                            sweetAlert({
+                                html: true,
+                                title: "Job Opening",
+                                text: "Successfully Created!",
+                                type: "success"
+                            }, function () {
+                                location.reload();
+                            });
+                        } else if (data.status === "duplicate") {
+                            sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                        } else if (data.status === "error") {
+                            sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                        } else {
+                            sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                        }
+                    },
+                    error: function (data) {
+                        if (data.status == 401) {
+                            window.location.replace('/Message/TokenExpire');
+                        } else if (data.status == 403) {
+                            window.location.replace('/Message/Unauthorize');
+                        } else if (data.status == 400) {
+                            sweetAlert("Validation Alert!", "Please check input data!", "warning");
+                        }
+                    }
+
+                });
+
+
+            }
+
+        });
+
+    </script>
+
+
+}

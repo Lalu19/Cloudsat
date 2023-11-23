@@ -1,0 +1,296 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "Career";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+    string ImageUrl = Configuration.GetValue<string>("WebImage");
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .item {
+        width: 441px;
+    }
+
+    svg {
+        vertical-align: middle;
+        margin-left: -140px;
+        margin-top: -12px;
+    }
+    .posttype .box {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 2px;
+        background-color: #e3e6ef;
+        padding: 48px;
+        margin-bottom: 12px;
+        font-size: larger;
+    }
+
+    textarea {
+        height: 80px;
+        resize: none;
+    }
+
+    .page-title .title {
+        font-size: 56px;
+        font-weight: 600;
+        line-height: 1.11;
+        margin-top: 100px;
+    }
+
+    @@media (min-width: 498px) and (max-width: 850px) {
+        svg {
+            vertical-align: middle;
+            margin-left: 136px !important;
+            margin-top: -62px;
+        }
+    }
+
+    @@media (min-width: 200px) and (max-width: 497px) {
+        svg {
+            vertical-align: middle;
+            margin-left: 171px;
+            margin-top: -67px;
+            margin-right: 113px;
+        }
+    }
+   
+</style>
+<main id="main" class="site-main">
+    <section class="page-title">
+        <div class="container">
+            <div class="inner align-center">
+                <h1 class="title">Get in Touch</h1>
+                <div class="desc">We’re happy to talk to you.</div>
+            </div>
+        </div>
+    </section><!-- PAGE TITLE -->
+    <div class="site-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="block-gallery layout-02">
+                        <div class="container" id="career">
+                            <div class="posttype">
+                                <div class="box">
+                                    <div class="content">
+                                        <label for="first_name">Job Position Name  : </label>
+                                        <label id="jobPositionName"></label>
+                                        <br /> <br />
+                                        <label for="first_name">Country  : </label>
+                                        <label id="country"></label>
+                                        <br /> <br />
+                                        <label for="first_name">State  : </label>
+                                        <label id="state"></label>
+                                        <br /> <br />
+                                        <label for="first_name">City  : </label>
+                                        <label id="city"></label>
+                                        <br /> <br />
+                                        <label for="first_name">Industry  : </label>
+                                        <label id="industry"></label>
+                                        <br /> <br />
+                                        <label for="first_name">Job Type  : </label>
+                                        <label id="jobType"></label>
+                                        <br /> <br />
+                                        <label for="first_name">Work Experience  : </label>
+                                        <label id="workExperience"></label>
+                                        <br /> <br />
+                                        <label for="first_name">Job Description  : </label>
+                                        <label id="jobDescription"></label>
+                                        <br /> <br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="contact-form layout-01">
+                        <div class="heading">
+                            <h2 class="heading-title">Send us a message.</h2>
+                            <div class="heading-desc">Feel free to contact us with questions, potential partnerships, or media inquiries.</div>
+                        </div>
+                        <form action="#" role="form" class="validate" id="formPost">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="field-input">
+                                        <label for="first_name">Name*</label>
+                                        <input type="text" name="first_name" id="first_name" value="" placeholder="Enter your  name">
+                                        <input type="text" name="first_name" id="jobid" hidden>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <div class="field-input">
+                                        <label for="work_email">Work email*</label>
+                                        <input type="text" name="work_email" id="work_email" value="" placeholder="Enter your email">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="field-input">
+                                        <label for="phone_number">Phone number*</label>
+                                        <input type="text" name="phone_number" id="phone_number" value="" placeholder="Enter your phone number">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="field-input">
+                                        <label for="work_email">Experience in Years*</label>
+                                        <input type="text" name="work_email" id="ExperienceinYear" value="" placeholder="Experience in Years ">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="field-input field-textarea">
+                                        <label for="message">Message*</label>
+                                        <textarea name="message" id="message" cols="30" rows="10" placeholder="Write your message"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="field-submit">
+                                        <button type="button" id="SaveBtn" class="btn btn-primary">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- SITE CONTENT -->
+</main>
+
+@section Scripts{
+
+    <script>
+        var jobOpeningId = @ViewBag.jobOpeningId
+            loadSingleJob()
+        function loadSingleJob() {
+            $.ajax({
+                type: "GET",
+                url: "@apiUrl/api/JobOpening/GetSingleJobOpening/" + jobOpeningId,
+
+                success: function (data) {
+                    //console.log(data);
+                    if (data) {
+                        $('#jobid').val(data.jobOpeningId);
+
+                    }
+                    else {
+                        sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                    }
+                },
+                error: function (data) {
+                    if (data.status == 401) {
+                        window.location.replace('/Message/TokenExpire');
+                    } else if (data.status == 403) {
+                        window.location.replace('/Message/Unauthorize');
+                    }
+                }
+            });
+        }
+
+        $("#SaveBtn").click(function (e) {
+
+            if (!document.getElementById("formPost").checkValidity()) {
+                e.preventDefault();
+            } else {
+
+
+
+                var model = {
+
+                    name: $.trim($("#first_name").val()),
+
+                    email: $.trim($("#work_email").val()),
+                    phone: $.trim($("#phone_number").val()),
+                    jobOpeningid: parseInt($("#jobid").val()),
+                    message: $.trim($("#message").val()),
+                    experienceinYears: $.trim($("#ExperienceinYear").val()),
+
+
+                }
+                
+                $.ajax({
+                    type: "POST",
+                    url: "@apiUrl/api/Careers/CareersCreate",
+                    data: JSON.stringify(model),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data, statusText, xhr) {
+                        if (xhr.status === 200) {
+                           alert("Record Submited Sucessfully")
+                        } else if (data.status === "duplicate") {
+                            sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                        } else if (data.status === "error") {
+                            sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                        } else {
+                            sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                        }
+                    },
+                    error: function (data) {
+                        if (data.status == 401) {
+                            window.location.replace('/Message/TokenExpire');
+                        } else if (data.status == 403) {
+                            window.location.replace('/Message/Unauthorize');
+                        } else if (data.status == 400) {
+                            sweetAlert("Validation Alert!", "Please check input data!", "warning");
+                        }
+                    }
+
+                });
+
+
+            }
+
+        });
+
+    </script>
+
+    <script>
+        var jobOpeningId = @ViewBag.jobOpeningId
+            loadSingleJobopening()
+        function loadSingleJobopening() {
+            $.ajax({
+                type: "GET",
+                url: "@apiUrl/api/JobOpening/GetSingleJobOpening/" + jobOpeningId,
+
+                success: function (data) {
+                    
+                    if (data) {
+                        $('#jobPositionName').text(data.jobPositionName);
+                        $('#country').text(data.country);
+                        $('#city').text(data.city);
+                        $('#state').text(data.state);
+                        $('#industry').text(data.industry);
+                        $('#jobType').text(data.jobType);
+                        $('#workExperience').text(data.workExperience);
+                        $('#jobDescription').text(data.jobDescription);
+
+                    }
+                    else {
+                        sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                    }
+                },
+                error: function (data) {
+                    if (data.status == 401) {
+                        window.location.replace('/Message/TokenExpire');
+                    } else if (data.status == 403) {
+                        window.location.replace('/Message/Unauthorize');
+                    }
+                }
+            });
+        }
+    </script>
+
+}

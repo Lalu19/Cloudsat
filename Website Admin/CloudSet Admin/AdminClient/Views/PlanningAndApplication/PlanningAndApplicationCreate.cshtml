@@ -1,0 +1,248 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "PlanningAndApplication Create";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+}
+
+<style>
+    .btn-primary {
+        color: #fff;
+        background: #3b16cc !important;
+        border-color: #3b16cc 74 !important;
+    }
+
+    #back-to-top {
+        background: #2d25c5;
+    }
+
+        #back-to-top:hover {
+            color: #3b16cc !important;
+            border: 2px solid #3b16cc;
+        }
+
+    .slide-menu a.active {
+        color: #3b16cc !important;
+    }
+
+    .sweet-alert button {
+        background-color: #0052cc !important;
+    }
+
+    a {
+        color: #3b16cc;
+    }
+</style>
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="fe fe-pie-chart mr-1"></i> Admin Console</a></li>
+        <li class="breadcrumb-item active" aria-current="page">PlanningAndApplication</li>
+    </ol>
+    <div class="ml-auto">
+        <a href="~/PlanningAndApplication/PlanningAndApplicationList" class="btn btn-primary btn-icon btn-sm text-white mr-2">
+            <span>
+                <i class="fe fe-plus"></i>
+            </span> View
+        </a>
+
+    </div>
+</div>
+
+<div class="col-md-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <div class="col-md-11">
+                <div class="card-title">PlanningAndApplication Create</div>
+            </div>
+        </div>
+        <div class="card-body" id="section">
+            <div>
+                <form action="#" role="form" class="validate" id="formPost">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div id="treeview">
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label for="fullname">Planning Name </label>
+                                        <select class="form-control" id="Planningname" required></select>
+                                    </div>
+                                </div>
+                                
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <button type="button" id="SaveBtn" class="btn btn-primary">Save</button>
+
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+
+   
+
+    <script>
+       
+
+        GetPlanning()
+        function GetPlanning(Id) {
+            var opt = '';
+            $.ajax({
+                type: "GET",
+                url: "@apiUrl/api/PlanningMaster/GetPlanningMasterList",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    
+                    var options = [];
+                    options.push('<option value="">--Select Planning--</option>');
+                    for (var i = 0; i < data.data.length; i++) {
+
+                        if (Id == data.data[i].planningId) {
+                            opt = 'selected'
+                        } else {
+                            opt = '';
+                        }
+                        options.push('<option value="' + data.data[i].planningId + '" ' + opt + '>' + data.data[i].planningName + '</option>');
+                    }
+                    $("#Planningname").html(options.join(''));
+                },
+
+                error: function (data) {
+                    if (data.status == 401) {
+                        window.location.replace('/Message/TokenExpire');
+                    } else if (data.status == 403) {
+                        window.location.replace('/Message/Unauthorize');
+                    }
+                }
+            });
+        }
+
+        var ApplicationMasterId;
+
+        function showTable() {
+            $('#tableView').show();
+            $('#treeview').hide();
+        }
+        function showTree() {
+            $('#tableView').hide();
+            $('#treeview').show();
+        }
+
+
+        $(function () {
+            $('#treeview').jstree({
+                'core': {
+                    'data': {
+                        'url': '/PlanningAndApplication/WithPrimaryNodes',
+                        'data': function (node) {
+                            return { 'id': node.id };
+                        }
+                    }
+                }
+            });
+
+
+            $('#treeview').on('changed.jstree', function (e, data) {
+                var i, j, r = [];
+                for (i = 0, j = data.selected.length; i < j; i++) {
+                    r.push(data.instance.get_node(data.selected[i]));
+
+                }
+                ApplicationMasterId = r[0].id;
+
+
+                // $('#event_result').html('Selected: ' + r.join(', '));
+            }).jstree();
+       
+         $("#SaveBtn").click(function (e) {
+            if (!document.getElementById("formPost").checkValidity()) {
+                e.preventDefault();
+            } else {
+              if (ApplicationMasterId != null) {
+                    if (ApplicationMasterId == 0) {
+                        ApplicationMasterId = null;
+                    }
+
+                var model = {
+
+                    planningId: parseInt($("#Planningname").val()),
+                    applicationMasterId: parseInt(ApplicationMasterId),
+                           
+                    createdBy: @Context.Session.GetInt32("UserId"),
+
+                }
+               
+                $.ajax({
+                    type: "POST",
+                    url: "@apiUrl/api/PlanningAndApplication/planningAndApplicationCreate",
+                    data: JSON.stringify(model),
+                    contentType: "application/json; charset=utf-8",
+
+                    dataType: "json",
+                    success: function (data, statusText, xhr) {
+                       
+                        if (xhr.status === 200) {
+
+                            sweetAlert({
+                                html: true,
+                                title: "Planning And Application",
+                                text: "Successfully Created!",
+                                type: "success"
+                            }, function () {
+                                location.reload();
+                            });
+                        } else if (data.status === "duplicate") {
+                            sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                        } else if (data.status === "error") {
+                            sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                        } else {
+                            sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                        }
+                    },
+                    error: function (data) {
+                        if (data.status == 401) {
+                            window.location.replace('/Message/TokenExpire');
+                        } else if (data.status == 403) {
+                            window.location.replace('/Message/Unauthorize');
+                        } else if (data.status == 400) {
+                            sweetAlert("Validation Alert!", "Please check input data!", "warning");
+                        }
+                    }
+
+                });
+
+              }
+
+
+            }
+
+         });
+
+        });
+       
+    </script>
+
+
+}

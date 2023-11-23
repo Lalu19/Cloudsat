@@ -1,0 +1,196 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "Download Aplication List";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+}
+
+<style>
+    .btn-primary {
+        color: #fff;
+        background: #3b16cc !important;
+        border-color: #3b16cc !important;
+    }
+
+    a {
+        color: #3b16cc;
+    }
+
+    a {
+        color: #3b16cc;
+    }
+
+    .sweet-alert button {
+        background-color: #0052cc !important;
+    }
+
+    .btn-secondary {
+        color: #fff;
+        background: #0052cc !important;
+        border-color: #0052cc;
+    }
+
+    img {
+        max-width: 93px;
+    }
+
+    .table th, .text-wrap table th {
+        color: #2e3138;
+        text-transform: inherit;
+        font-size: 0.875rem;
+        font-weight: 400;
+    }
+</style>
+<!-- PAGE-HEADER -->
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="fe fe-file-text mr-1"></i>Admin Consol</a></li>
+        <li class="breadcrumb-item active" aria-current="page">DownloadApplication List</li>
+    </ol>
+    <div class="ml-auto">
+        <a href="~/DownloadApplication/DownloadApplicationCreate" class="btn btn-primary btn-icon btn-sm text-white mr-2">
+            <span>
+                <i class="fe fe-plus"></i>
+            </span> Appliction Create
+        </a>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Download Aplication List</div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive" id="tableView">
+                    <table id="page_Tb" class="table table-striped table-bordered nowrap dataTable no-footer dtr-inline" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Aplication</th>
+
+                                <th>File</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+
+    <script>
+
+            loadCategory();
+
+            function loadCategory() {
+                var table = $('#page_Tb').DataTable();
+                table.destroy();
+                table = $('#page_Tb').dataTable({
+                    //"paginationType": "full_numbers",
+                    "dom": 'Bfrtip',
+                    "buttons": [/*'copy',*/ 'csv', 'excel', 'pdf', 'print'],
+                    "searching": true,
+                    "paging": true,
+                    "sort": true,
+                    "info": true,
+                    "ajax": {
+                    "url": "@apiUrl/api/DownloadApp/GetDownloadApplicationList",
+                        "type": "GET",
+                        "dataType": "json",
+
+                        "error": function (data) {
+                            if (data.status == 401) {
+                                window.location.replace('/Message/TokenExpire');
+                            } else if (data.status == 403) {
+                                window.location.replace('/Message/Unauthorize');
+                            }
+                        }
+                    },
+                    "order": [],
+                    "columns": [
+                    { "data": "applicationName", "orderable": true },
+
+
+                        {
+                            "render": function (data, type, row) {
+                            if (row.applicationFile === '')
+                                    return '';
+                                else
+                                return '<img src="' + row.applicationFile + '"/>'
+
+                            }
+                        },
+
+
+                        {
+                            "render": function (data, type, row) {
+
+                                return '<a href="/DownloadApplication/DownloadApplicationEdit?DownloadApplicationId=' + row.downloadAppId + '">edit</a> &nbsp;      <button class="btn btn-secondary btn-sm rounded-circle" title="Delete" data-target="#delete" data-title="Delete" data-toggle="modal" data-id=' + row.downloadAppId + '><i class="material-icons">delete</i></button>'
+
+                            }
+                        },
+
+                    ]
+                });
+            }
+
+            $('#page_Tb tbody').on('click', 'button[data-target="#delete"]', function () {
+                var id = $(this).data('id');
+
+
+                swal({
+                    html: true,
+                    title: "Are you sure?",
+                    text: "You will not be able to recover this data!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3b16cc",
+                    confirmButtonText: "Yes, confirm it!",
+                    closeOnConfirm: false
+                }, function () {
+                    $.ajax({
+                        type: "GET",
+                    url: "@apiUrl/api/DownloadApp/DeleteDownloadApplication/" + id + "/" + @Context.Session.GetInt32("UserId"),
+
+                        contentType: "application/json; charset=utf-8",
+                        headers: {
+                            "authorization": "Bearer @Context.Session.GetString("TokenTxt")"
+                        },
+                        dataType: "json",
+                        success: function (data, statusText, xhr) {
+                            if (xhr.status == 200) {
+                                $('#page_Tb').DataTable().ajax.reload(null, false);
+                                sweetAlert({
+                                    html: true,
+                                title: "Application",
+                                    text: "Successfully deleted!",
+                                    type: "success"
+                                });
+                            } else if (xhr.status == 202) {
+                                sweetAlert("Validation Alert!", data.responseMsg, "warning");
+                            } else {
+                                sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                            }
+                        },
+                        error: function (data) {
+                            if (data.status == 401) {
+                                window.location.replace('/Message/TokenExpire');
+                            } else if (data.status == 403) {
+                                window.location.replace('/Message/Unauthorize');
+                            }
+                        }
+                    });
+                });
+            });
+
+    </script>
+}

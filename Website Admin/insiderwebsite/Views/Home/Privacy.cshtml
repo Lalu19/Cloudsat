@@ -1,0 +1,72 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "Privacy Policy";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+    string ImageUrl = Configuration.GetValue<string>("WebImage");
+    Layout = "_Layout";
+}
+
+<style>
+    @@media (min-width: 498px) and (max-width: 850px) {
+        svg {
+            vertical-align: middle;
+            margin-left: 136px !important;
+            margin-top: -62px;
+        }
+    }
+
+    @@media (min-width: 200px) and (max-width: 497px) {
+        svg {
+            vertical-align: middle;
+            margin-left: -101px;
+            margin-top: -62px;
+        }
+    }
+
+    svg {
+        vertical-align: middle;
+        margin-left: -123px;
+        margin-top: -67px ;
+        margin-right: 113px;
+    }
+
+    @@media (min-width: 1000px) and (max-width: 1400px) {
+        li.is-normal-menu.has-sub-menu {
+            margin-right: -44px;
+        }
+    }
+</style>
+
+<p id="contentpage"></p>
+
+@section scripts{
+    <script>
+       
+        getHomecontentlist()
+        function getHomecontentlist() {
+            $.ajax(
+                {
+                    url: "@apiUrl/api/PrivacyPolicy/GetPrivacypolicy",
+                    type: "GET",
+                    success: function (data) {
+
+                        for (var i = 0; i < data.data.length;i++) {
+                            var textcontent = data.data[i]["text"];
+                        }
+                        $('#contentpage').html(textcontent);
+
+                    },
+
+                    error: function (err) {
+                        console.log(err);
+
+                    }
+                }
+            );
+
+        }
+    </script>
+}

@@ -1,0 +1,491 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "Dashboard";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+}
+
+<style>
+    a {
+        color: #3b16cc;
+    }
+
+    .sweet-alert button {
+        background-color: #0052cc !important;
+    }
+
+    .text-primary {
+        color: #ee7c06 !important;
+    }
+
+    .btn-success {
+        color: #fff;
+        background: #3b16cc !important;
+        border-color: #3b16cc;
+    }
+
+    .table th, .text-wrap table th {
+        color: #2e3138;
+        text-transform: inherit;
+        font-size: 0.875rem;
+        font-weight: 400;
+    }
+</style>
+
+<div class="page-header">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="fe fe-home mr-1"></i> Admin Console</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+    </ol>
+
+</div>
+
+
+<div class="row">
+    <div class="col-xl-3 col-lg-6 col-md-12">
+        <div class="card">
+            <div class="card-body d-flex">
+                <div class="card-order">
+                    <h6 class="mb-2">Cloudsat Admin Users</h6>
+                    <h2 class="mb-1"><span class="number-font counter" id="totalUser"></span></h2>
+                    <p class="text-muted fs-12 mb-0"></p>
+                </div>
+                <div class="ml-auto">
+                    <span class="bg-primary-transparent icon-service text-primary"><i class="mdi mdi-account-multiple  fs-2"></i> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-12">
+        <div class="card">
+            <div class="card-body d-flex">
+                <div class="card-order">
+                    <h6 class="mb-2">Active users</h6>
+                    <h2 class="mb-1"><span class="number-font counter" id="activeUser"></span></h2>
+                    <p class="text-muted fs-12 mb-0"></p>
+                </div>
+                <div class="ml-auto">
+                    <span class="bg-primary-transparent icon-service text-primary"><i class="mdi mdi-account-multiple  fs-2"></i> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-12">
+        <div class="card">
+            <div class="card-body d-flex">
+                <div class="card-order">
+                    <h6 class="mb-2">In-Active users</h6>
+                    <h2 class="mb-1"><span class="number-font counter" id="inActiveUser"></span></h2>
+                    <p class="text-muted fs-12 mb-0"></p>
+                </div>
+                <div class="ml-auto">
+                    <span class="bg-primary-transparent icon-service text-primary"><i class="mdi mdi-account-multiple  fs-2"></i> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-md-12">
+        <div class="card">
+            <div class="card-body d-flex">
+                <div class="card-order">
+                    <h6 class="mb-2">Admin users</h6>
+                    <h2 class="mb-1"><span class="number-font counter" id="adminUser"></span></h2>
+                    <p class="text-muted fs-12 mb-0"></p>
+                </div>
+                <div class="ml-auto">
+                    <span class="bg-primary-transparent icon-service text-primary"><i class="mdi mdi-account-multiple  fs-2"></i> </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+
+            <div class="card-body">
+                <div class="table-responsive" id="tableView">
+                    <table id="page_Tb" class="table table-striped table-bordered nowrap dataTable no-footer dtr-inline" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Message</th>
+                                <th>ExperienceinYears</th>
+                                <th>Status</th>
+                                <th>JobPositionName</th>
+                                <th>Country</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Industry</th>
+                                <th>JobType</th>
+                                <th>DateOpened</th>
+                                <th>JobDescription</th>
+
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<section>
+        <div class="row">
+
+            <div class="col-sm-12 col-md-12 col-lg-7 col-xl-8">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Date Wise Login</div>
+                        <div class="card-options">
+                            <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="dateChart" width="400" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-5 col-xl-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">User Statistics</div>
+                        <div class="card-options">
+                            <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="pieChart" width="400" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Month Wise Login</div>
+                        <div class="card-options">
+                            <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="monthChart" width="400" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Year Wise Login</div>
+                        <div class="card-options">
+                            <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="yearChart" width="400" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>*@
+
+@section scripts{
+    <script>
+        var dateChartData = null, pieChartData = null, monthChartData = null, yearChartData=null;
+        $(function () {
+            if ('@Context.Session.GetString("RoleName")'== 'Admin') {
+                $('#userStatus').show();
+                loadUserStatus();
+            }
+            loadDateChart();
+            loadPieChart();
+            loadMonthChart();
+            loadYearChart();
+
+            new Chart($('#dateChart'), {
+                type: 'line',
+                data: {
+                    labels: dateChartData.map(x => x.date),
+                    datasets: [
+                        {
+                            label: 'Date wise Login',
+                            backgroundColor: '#0052cc',
+                            data: dateChartData.map(x => x.count)
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            new Chart($('#pieChart'), {
+                type: 'pie',
+                data: {
+                    labels: pieChartData.map(x => x.roleName),
+                    datasets: [
+                        {
+                            backgroundColor: '#0052cc',
+                            data: pieChartData.map(x => x.count)
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            new Chart($('#monthChart'), {
+                type: 'bar',
+                data: {
+                    labels: monthChartData.map(x => x.month),
+                    datasets: [
+                        {
+                            label: 'Month wise Login',
+                            backgroundColor: '#0052cc',
+                            data: monthChartData.map(x => x.count)
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+
+            new Chart($('#yearChart'), {
+                type: 'bar',
+                data: {
+                    labels: yearChartData.map(x => x.year),
+                    datasets: [
+                        {
+                            label: 'Year wise Login',
+                            backgroundColor: '#0052cc',
+                            data: yearChartData.map(x => x.count)
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+
+        function loadDateChart() {
+            $.ajax({
+                type: "GET",
+                url: "@apiUrl/api/Users/GetLogInSummaryByDate/@Context.Session.GetInt32("UserId")",
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                       "authorization": "Bearer @Context.Session.GetString("TokenTxt")"
+                },
+                dataType: "json",
+                async:false,
+                success: function (data) {
+                    //console.log(data)
+                    dateChartData = data;
+                },
+                error: function (data) {
+                    if (data.status == 401) {
+                        window.location.replace('/Message/TokenExpire');
+                    } else if (data.status == 403) {
+                        window.location.replace('/Message/Unauthorize');
+                    }
+                }
+            });
+        }
+        function loadPieChart() {
+            $.ajax({
+                type: "GET",
+                url: "@apiUrl/api/Users/GetRoleWiseUser",
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                       "authorization": "Bearer @Context.Session.GetString("TokenTxt")"
+                },
+                dataType: "json",
+                async:false,
+                success: function (data) {
+                    //console.log(data)
+                    pieChartData = data;
+                },
+                error: function (data) {
+                    if (data.status == 401) {
+                        window.location.replace('/Message/TokenExpire');
+                    } else if (data.status == 403) {
+                        window.location.replace('/Message/Unauthorize');
+                    }
+                }
+            });
+        }
+        function loadMonthChart() {
+            $.ajax({
+                type: "GET",
+                url: "@apiUrl/api/Users/GetLogInSummaryByMonth/@Context.Session.GetInt32("UserId")",
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                       "authorization": "Bearer @Context.Session.GetString("TokenTxt")"
+                },
+                dataType: "json",
+                async:false,
+                success: function (data) {
+                    //console.log(data)
+                    monthChartData = data;
+                },
+                error: function (data) {
+                    if (data.status == 401) {
+                        window.location.replace('/Message/TokenExpire');
+                    } else if (data.status == 403) {
+                        window.location.replace('/Message/Unauthorize');
+                    }
+                }
+            });
+        }
+        function loadYearChart() {
+            $.ajax({
+                type: "GET",
+                url: "@apiUrl/api/Users/GetLogInSummaryByYear/@Context.Session.GetInt32("UserId")",
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                       "authorization": "Bearer @Context.Session.GetString("TokenTxt")"
+                },
+                dataType: "json",
+                async:false,
+                success: function (data) {
+                    //console.log(data)
+                    yearChartData = data;
+                },
+                error: function (data) {
+                    if (data.status == 401) {
+                        window.location.replace('/Message/TokenExpire');
+                    } else if (data.status == 403) {
+                        window.location.replace('/Message/Unauthorize');
+                    }
+                }
+            });
+        }
+
+        function loadUserStatus() {
+            $.ajax({
+                type: "GET",
+                url: "@apiUrl/api/Users/UserStatus",
+                contentType: "application/json; charset=utf-8",
+                headers: {
+                       "authorization": "Bearer @Context.Session.GetString("TokenTxt")"
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data) {
+                        $('#totalUser').text(data.totalUser);
+                        $('#activeUser').text(data.activeUser);
+                        $('#inActiveUser').text(data.inActiveUser);
+                        $('#adminUser').text(data.adminUser);
+                    } else {
+                        sweetAlert("Validation Alert!", "Something unexpected!", "warning");
+                    }
+                },
+                error: function (data) {
+                    if (data.status == 401) {
+                        window.location.replace('/Message/TokenExpire');
+                    } else if (data.status == 403) {
+                        window.location.replace('/Message/Unauthorize');
+                    }
+                }
+            });
+        }
+    </script>
+    <script>
+
+
+        $(function () {
+            loadCategory();
+
+
+            function loadCategory() {
+                var table = $('#page_Tb').DataTable();
+                table.destroy();
+                table = $('#page_Tb').dataTable({
+                    "paginationType": "full_numbers",
+                    "dom": 'Bfrtip',
+                    "buttons": [/*'copy',*/ 'csv', 'excel', 'pdf', 'print'],
+                    "searching": true,
+                    "paging": true,
+                    "sort": true,
+                    "info": true,
+                    "ajax": {
+                        "url": "@apiUrl/api/Careers/GetCareersListwithjobopening",
+                        "type": "GET",
+                        "dataType": "json",
+
+                        "error": function (data) {
+                            if (data.status == 401) {
+                                window.location.replace('/Message/TokenExpire');
+                            } else if (data.status == 403) {
+                                window.location.replace('/Message/Unauthorize');
+                            }
+                        }
+                    },
+                    "order": [],
+                    "columns": [
+
+                        { "data": "name", "orderable": true },
+                        { "data": "email", "orderable": true },
+                        { "data": "phone", "orderable": true },
+                        { "data": "message", "orderable": true },
+                        { "data": "experienceinYears", "orderable": true },
+                        { "data": "status", "orderable": true },
+                        { "data": "jobPositionName", "orderable": true },
+                        { "data": "country", "orderable": true },
+                        { "data": "city", "orderable": true },
+                        { "data": "state", "orderable": true },
+                        { "data": "industry", "orderable": true },
+                        { "data": "jobType", "orderable": true },
+                        {
+                            "data": "dateOpened",
+                            "orderable": true,
+                            "render": function (data, type, row) {
+                                return row.dateOpened != null ? row.dateOpened.substring(0, 10) : '';
+                            }
+                        },
+                        { "data": "jobDescription", "orderable": true },
+
+
+                    ]
+                });
+            }
+
+
+
+        });
+
+
+
+    </script>
+
+}

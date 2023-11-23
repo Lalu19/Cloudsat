@@ -1,0 +1,94 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "Termsandconditions";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+   // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    p {
+        text-align: justify;
+    }
+    .heading {
+        margin: 0px auto 20px;
+    }
+
+    .spdt {
+        padding-top: 100px;
+    }
+
+    @@media (min-width: 498px) and (max-width: 850px) {
+        svg {
+            vertical-align: middle;
+            margin-left: 136px !important;
+            margin-top: -62px;
+        }
+    }
+
+    @@media (min-width: 200px) and (max-width: 497px) {
+        svg {
+            vertical-align: middle;
+            margin-left: 171px;
+            margin-top: -67px;
+            margin-right: 113px;
+        }
+    }
+
+    @@media (max-width: 1000px) {
+        img.weblogo {
+            margin: 0px 0px -15px 0px !important;
+            width: 89px;
+        }
+    }
+   
+</style>
+<main id="main" class="site-main">
+    <div class="site-content pt0 pb0">
+        <section class="section spdt">
+            <div class="container">
+                <div class="heading align-center">
+                    <h2 class="heading-title size-l" style="color: #f06117;">Terms & Conditions</h2>
+                </div>
+                <div class="block-icon-box layout-01">
+                    <div class="row">
+
+                        <p id="contentpage"></p>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+       
+    </div>
+</main>
+@section scripts{
+    <script>
+
+        getHometermcontentlist()
+        function getHometermcontentlist() {
+            $.ajax(
+                {
+                    url: "@apiUrl/api/Termsandconditions/GetTermsandconditions",
+                    type: "GET",
+                    success: function (data) {
+
+                        for (var i = 0; i < data.data.length;i++) {
+                            var textcontent = data.data[i]["termsandconditionText"];
+                        }
+                        $('#contentpage').html(textcontent);
+
+                    },
+
+                    error: function (err) {
+                        console.log(err);
+
+                    }
+                }
+            );
+
+        }
+    </script>
+
+}

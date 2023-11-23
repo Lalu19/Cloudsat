@@ -1,0 +1,105 @@
+﻿@using Microsoft.Extensions.Configuration;
+@using Microsoft.AspNetCore.Http
+@inject IConfiguration Configuration;
+
+@{
+    ViewBag.Title = "Privacy";
+    string apiUrl = Configuration.GetValue<string>("WebAPIBaseUrl");
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <title>@ViewBag.Title</title>
+</head>
+<style>
+    p {
+        text-align: justify;
+    }
+    .heading {
+       
+        margin: 0px auto 20px;
+    }
+
+    .spdt {
+        padding-top: 110px;
+    }
+
+    @@media (min-width: 498px) and (max-width: 850px) {
+        svg {
+            vertical-align: middle;
+            margin-left: 136px !important;
+            margin-top: -62px;
+        }
+    }
+
+    @@media (min-width: 200px) and (max-width: 497px) {
+        svg {
+            vertical-align: middle;
+            margin-left: 171px;
+            margin-top: -67px;
+            margin-right: 113px;
+        }
+    }
+
+    @@media (max-width: 1000px) {
+        img.weblogo {
+            margin: 0px 0px -15px 0px !important;
+            width: 89px;
+        }
+    }
+</style>
+<main id="main" class="site-main">
+    <div class="site-content pt0 pb0">
+        <section class="section spdt">
+            <div class="container">
+                <div class="heading align-center">
+                    <h2 class="heading-title size-l" style="color: #f06117;">Privacy Policy</h2>
+                </div>
+                <div class="block-icon-box layout-01">
+                    <div class="row">
+
+                        <p id="privacy"></p>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+@section scripts{
+
+    <script>
+        getprivacylist()
+        function getprivacylist() {
+            $.ajax(
+                {
+                    url: "@apiUrl/api/PrivacyPolicy/GetPrivacypolicy",
+                    type: "GET",
+                    success: function (data) {
+                        //console.log(data);
+                        var x = '';
+                        for (var l = 0; l < data.data.length; l++) {
+
+                            x = x + '<p>' + data.data[l]['text'] + '</p>'
+
+                        }
+                        $('#privacy').html(x);
+
+
+                    },
+
+                    error: function (err) {
+                        console.log(err);
+
+                    }
+                }
+            );
+
+        }
+
+
+
+    </script>
+
+}
